@@ -4,8 +4,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import {HttpClientModule, HttpClient} from '@angular/common/http';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AuthModule } from './auth/auth.module';
+import { BookModule } from './book/book.module';
+import { TradeModule } from './trade/trade.module';
+import { ProfileModule } from './profile/profile.module';
+import { HomeModule } from './home/home.module';
+import { HeaderComponent } from './common-ui/header/header.component';
+import { MenuComponent } from './common-ui/menu/menu.component';
 
 
 
@@ -14,7 +21,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 }
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +37,12 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         deps: [HttpClient]
       },
       defaultLanguage: 'en'
-    })
+    }),
+    AuthModule,
+    BookModule,
+    TradeModule,
+    HomeModule,
+    ProfileModule
   ],
   exports: [MaterialModule],
   providers: [],
