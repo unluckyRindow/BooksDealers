@@ -11,15 +11,15 @@ import { ProfileComponent } from './profile/components/profile/profile.component
 
 // TODO routing for perticular book (popup insted?) and existing trade
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: '/home', canActivate: [AuthGuard]},
-  {path: '**', redirectTo: '/home', canActivate: [AuthGuard]},
-  {path: '/login', component: LoginComponent},
-  {path: '/register', component: RegisterComponent},
-  {path: '/home', component: HomeComponent, canActivate: [AuthGuard]},
-  {path: '/profile', component: ProfileComponent, canActivate: [AuthGuard]},
-  {path: '/books', component: BooksListComponent, canActivate: [AuthGuard]},
-  {path: '/my-books', component: UserBooksListComponent, canActivate: [AuthGuard]},
-  {path: '/trades', component: TradesListComponent, canActivate: [AuthGuard]}
+  {path: '', pathMatch: 'full', redirectTo: '/home'},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'books', component: BooksListComponent, canActivate: [AuthGuard]},
+  {path: 'my-books', component: UserBooksListComponent, canActivate: [AuthGuard]},
+  {path: 'trades', component: TradesListComponent, canActivate: [AuthGuard]},
+  {path: '**', redirectTo: '/home'}
 ];
 
 @NgModule({

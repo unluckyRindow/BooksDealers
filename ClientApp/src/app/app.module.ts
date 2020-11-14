@@ -13,6 +13,7 @@ import { ProfileModule } from './profile/profile.module';
 import { HomeModule } from './home/home.module';
 import { HeaderComponent } from './common-ui/header/header.component';
 import { MenuComponent } from './common-ui/menu/menu.component';
+import { AuthGuard } from './auth/auth-guard';
 
 
 
@@ -45,7 +46,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ProfileModule
   ],
   exports: [MaterialModule],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
