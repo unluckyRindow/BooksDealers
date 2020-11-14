@@ -1,6 +1,11 @@
-<div>
-
-<button mat-button color='primary'>{{ 'HELLO' | translate }}</button>
-
-
+<div *ngIf='isAuthenticated; else loginPage' >
+    <app-header></app-header>
+    <app-menu></app-menu>
+    <router-outlet></router-outlet>
 </div>
+
+<ng-template #loginPage>
+    <app-login></app-login>
+</ng-template>
+
+
