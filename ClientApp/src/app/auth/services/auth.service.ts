@@ -29,4 +29,9 @@ export class AuthService {
     }
     return of(false);
   }
+
+  logout(): void {
+    this.tokenService.authenticated = false;
+    this.authenticationChanged.next(true);
+  }
 }

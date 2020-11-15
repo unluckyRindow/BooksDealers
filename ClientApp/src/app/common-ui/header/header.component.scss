@@ -1,0 +1,46 @@
+.header-container {
+    background-color: #373a40;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    font-family: Roboto;
+    color: #eeeeee;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.42);
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+}
+
+.header{
+    padding-bottom: 10px;
+    padding-left: 150px;
+    font-size: 50px;
+}
+
+.navigation-container {
+    padding-bottom: 10px;
+    display: flex;
+}
+
+.navigation-button {
+    padding: 0 10px;
+    font-size: 20px;
+}
+
+.mat-custom-button {
+    background-color: #373a40;
+    color: #eeeeee;
+    font-size: 20px;;
+}
+
+.user-menu {
+    padding-bottom: 10px;
+}
+
+.user-menu .mat-mini-fab {
+    background-color: #eeeeee;
+    color: #373a40;
+}

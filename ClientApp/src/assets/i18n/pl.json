@@ -8,5 +8,13 @@
         "OR": "lub",
         "REGISTRATION": "Rejestracja",
         "CANCEL": "Anuluj"
+    },
+    "HEADER" : {
+        "HOME": "STRONA GŁÓWNA",
+        "BOOKS": "KSIĄŻKI",
+        "MY_BOOKS": "MOJE KSIĄŻKI",
+        "TRADES": "WYMIANY",
+        "SETTINGS": "Ustawienia użytkownika",
+        "LOG_OUT": "Wyloguj się"
     }
 }
