@@ -10,7 +10,7 @@ import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
 })
 export class AppComponent implements OnInit {
   title = 'BooksExchange';
-  isAuthenticated = false;
+  isAuthenticated = true;
 
   constructor(
     private authService: AuthService,

@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 // provide all basic functionality of managing JWT in app
 export class TokenService {
 
-  authenticated = false;
+  authenticated = true;
 
   constructor() { }
 

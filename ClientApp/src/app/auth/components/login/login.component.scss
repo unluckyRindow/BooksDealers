@@ -14,17 +14,16 @@
     align-items: center;
     border: 1px solid #373a40;
     border-radius: 10px;
-    //background-color: #eeeeee;
 }
 
 .login-content {
-    background-color: rgb(0, 255, 221);
     margin: 10px;
 }
 
 .default-header {
     padding: 30px 0;
     font-size: 40px;
+    font-family: Roboto;
 }
 
 .mat-custom-raised-button {
@@ -38,6 +37,7 @@
 
 .button-panel {
     padding: 20px 0;
+    font-family: Roboto;
 }
 
 .button-wrapper {
