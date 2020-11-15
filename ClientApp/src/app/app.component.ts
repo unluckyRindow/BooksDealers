@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/services/auth.service';
+import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
 
-
+@UntilDestroy()
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,6 +17,12 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit(): void{
-    this.isAuthenticated = this.authService.isAuthenticated();
+    this.authService.authenticationChanged
+      .pipe(untilDestroyed(this))
+      .subscribe(x => {
+        if (x) {
+          this.isAuthenticated = this.authService.isAuthenticated();
+        }
+      });
   }
 }

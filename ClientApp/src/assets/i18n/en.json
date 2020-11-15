@@ -1,3 +1,12 @@
 {
-    "HELLO": "Hello"
+    "LOGIN" : {
+        "SIGN_IN": "Sign in",
+        "LOGIN": "Login",
+        "PASSWORD": "Password",
+        "SIGN_UP": "Sign up",
+        "ERROR": "*Invalid login or password, try again",
+        "OR": "or",
+        "REGISTRATION": "Sign up",
+        "CANCEL": "Cancel"
+    }
 }

@@ -45,7 +45,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     HomeModule,
     ProfileModule
   ],
-  exports: [MaterialModule],
+  exports: [TranslateModule],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
