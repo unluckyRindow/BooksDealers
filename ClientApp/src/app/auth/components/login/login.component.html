@@ -1,1 +1,67 @@
-<p>login works!</p>
+<div class="wrapper">
+    <div class="login-container">
+        <div *ngIf="loginMode; else registrationPage">
+            <div class="default-header">{{ 'LOGIN.SIGN_IN' | translate}}</div>
+
+            <div [formGroup]="signInGroup">
+                <div class="form-field">
+                    <mat-form-field>
+                        <mat-label>{{ 'LOGIN.LOGIN'  | translate}}</mat-label>
+                        <input matInput formControlName="login">
+                    </mat-form-field>
+                </div>
+    
+                <div class="form-field">
+                    <mat-form-field>
+                        <mat-label>{{ 'LOGIN.PASSWORD'  | translate}}</mat-label>
+                        <input
+                            matInput [type]="hidePassword ? 'password' : 'text'" 
+                            formControlName="password">
+                        <button 
+                            mat-icon-button 
+                            matSuffix 
+                            (click)="hidePassword = !hidePassword" 
+                            [attr.aria-label]="'Hide password'" 
+                            [attr.aria-pressed]="hidePassword">
+                        <mat-icon>
+                            {{hidePassword ? 'visibility_off' : 'visibility'}}
+                        </mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div *ngIf="invalidLoginAttempt" id="errorMessage">
+                {{ 'LOGIN.ERROR' | translate}}
+            </div>
+
+            <div class="button-panel">
+                <span class="button-wrapper">
+                    <button mat-raised-button color="custom-raised-button" (click)="onSignIn()">{{ 'LOGIN.SIGN_IN' | translate}}</button>
+                </span>
+                {{ 'LOGIN.OR' | translate}}
+                <span class="button-wrapper">
+                    <button mat-stroked-button color="custom-stroked-button" (click)="onSignUp()">{{ 'LOGIN.SIGN_UP' | translate}}</button>
+                </span>
+            </div>
+        </div>
+
+
+
+
+        <ng-template #registrationPage>
+            <div class="default-header">{{ 'LOGIN.REGISTRATION' | translate}}</div>
+
+            <div class="button-panel">
+                <span class="button-wrapper">
+                    <button mat-raised-button color="custom-raised-button" (click)="onSignUp()">{{ 'LOGIN.SIGN_UP' | translate}}</button>
+                </span>
+                <span class="button-wrapper">
+                    <button mat-stroked-button color="custom-stroked-button" (click)="onCancel()">{{ 'LOGIN.CANCEL' | translate}}</button>
+                </span>
+            </div>
+        </ng-template>
+
+    </div>
+</div>
+    

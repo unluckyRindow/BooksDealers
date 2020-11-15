@@ -1,3 +1,12 @@
 {
-    "HELLO": "Cześć"
+    "LOGIN" : {
+        "SIGN_IN": "Zaloguj się",
+        "LOGIN": "Login",
+        "PASSWORD": "Hasło",
+        "SIGN_UP": "Zarejestruj się",
+        "ERROR": "*Błędny login lub hasło, spróbuj ponownie",
+        "OR": "lub",
+        "REGISTRATION": "Rejestracja",
+        "CANCEL": "Anuluj"
+    }
 }
