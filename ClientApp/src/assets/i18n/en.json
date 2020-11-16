@@ -16,5 +16,13 @@
         "TRADES": "TRADES",
         "SETTINGS": "User settings",
         "LOG_OUT": "Log out"
+    },
+    "PROFILE" : {
+        "CHANGE_PASSWORD": "Change password",
+        "NEW": "New password",
+        "CONFIRM": "Confirm password",
+        "CHANGE_LANGUAGE" : "Change language",
+        "LANGUAGE": "Language",
+        "SAVE": "Save"
     }
 }

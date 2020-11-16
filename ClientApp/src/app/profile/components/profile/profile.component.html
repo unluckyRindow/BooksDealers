@@ -1,1 +1,40 @@
-<p>profile works!</p>
+<div id="profile-wrapper">
+    <div class="profile-image">
+        <mat-icon [inline]="true" color="custom-icon">person</mat-icon>
+    </div>
+    
+    <div class="profile-edit" [formGroup]="profileEditGroup">
+        <div class="default-font custom-label">{{ 'PROFILE.CHANGE_PASSWORD' | translate}}</div>
+        <div class="form-field">
+            <mat-form-field>
+                <mat-label>{{ 'PROFILE.NEW' | translate}}</mat-label>
+                <input matInput formControlName="password">
+            </mat-form-field>
+        </div>
+    
+        <div class="form-field">
+            <mat-form-field>
+                <mat-label>{{ 'PROFILE.CONFIRM' | translate}}</mat-label>
+                <input matInput formControlName="password_confirm">
+            </mat-form-field>
+        </div>  
+        
+        <div class="language-select">
+            <div class="default-font custom-label">{{ 'PROFILE.CHANGE_LANGUAGE' | translate}}</div>
+            <div class="form-field">
+                <mat-form-field>
+                    <mat-label>{{ 'PROFILE.LANGUAGE' | translate}}</mat-label>
+                    <mat-select (selectionChange)="onLanguageChange($event.value)">
+                        <mat-option *ngFor="let language of languages" [value]="language.value">
+                            {{language.label}}
+                          </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div id="save-button">
+            <button mat-button color="custom-button" (click)="onSave()">{{ 'PROFILE.SAVE' | translate}}</button>
+        </div>
+    </div>
+</div>
