@@ -16,5 +16,13 @@
         "TRADES": "WYMIANY",
         "SETTINGS": "Ustawienia użytkownika",
         "LOG_OUT": "Wyloguj się"
+    },
+    "PROFILE" : {
+        "CHANGE_PASSWORD": "Zmień hasło",
+        "NEW": "Nowe hasło",
+        "CONFIRM": "Potwierdź hasło",
+        "CHANGE_LANGUAGE" : "Zmień język",
+        "LANGUAGE": "Język",
+        "SAVE": "Zapisz"
     }
 }

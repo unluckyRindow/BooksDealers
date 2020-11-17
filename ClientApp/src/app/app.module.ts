@@ -12,7 +12,6 @@ import { TradeModule } from './trade/trade.module';
 import { ProfileModule } from './profile/profile.module';
 import { HomeModule } from './home/home.module';
 import { HeaderComponent } from './common-ui/header/header.component';
-import { MenuComponent } from './common-ui/menu/menu.component';
 import { AuthGuard } from './auth/auth-guard';
 
 
@@ -24,7 +23,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   declarations: [
     AppComponent,
     HeaderComponent,
-    MenuComponent
   ],
   imports: [
     BrowserModule,

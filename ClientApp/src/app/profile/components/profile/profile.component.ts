@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  languages = [
+    {value: 'en', label: 'English'},
+    {value: 'pl', label: 'Polski'}
+  ];
+  profileEditGroup = this.fb.group({
+    password: [''],
+    password_confirm: ['']
+  });
+
+  constructor(
+    private fb: FormBuilder,
+    private translateService: TranslateService,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  onLanguageChange(lang: string): void {
+    this.translateService.use(lang);
+  }
+
+  onSave(): void {
+    // validate and save pass
   }
 
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
 import { Observable, of, Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -15,6 +16,7 @@ export class AuthService {
 
   constructor(
     private tokenService: TokenService,
+    private router: Router,
   ) { }
 
   isAuthenticated(): boolean {
@@ -33,5 +35,6 @@ export class AuthService {
   logout(): void {
     this.tokenService.authenticated = false;
     this.authenticationChanged.next(true);
+    this.router.navigate(['/login']);
   }
 }

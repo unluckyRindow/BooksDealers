@@ -1,1 +1,59 @@
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+.profile-image {
+    font-size: 250px;
+}
+
+.mat-custom-icon {
+    color: #373a40;
+}
+
+.mat-custom-button {
+    background-color: #373a40;
+    color: #eeeeee;
+    font-size: 20px;;
+}
+
+.custom-title {
+    font-size: 40px;
+    padding: 10px;
+    color: #373a40
+}
+
+.custom-label {
+    font-size: 25px;
+    color: #686d76;
+    padding: 20px 0;
+}
+
+.default-font {
+    font-family: Roboto;
+    color: #686d76;
+}
+
+.input.mat-input-element {
+    color: #686d76;
+}
+
+.mat-form-field.mat-focused .mat-form-field-label {
+    color: #686d76 !important;
+}
+
+.mat-focused .mat-form-field-underline .mat-form-field-ripple{
+    background-color: #686d76 !important;
+}
+
+.mat-selected {
+    color: black !important;
+}
+
+
+
+/*
+dummy color pallete
+
+light: #eeeeee
+medium: #686d76
+dark: #373a40
+*/
