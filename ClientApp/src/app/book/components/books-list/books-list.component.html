@@ -1,6 +1,6 @@
 <mat-form-field>
     <mat-label>Enter Title</mat-label>
-    <input matInput (keyup)="applyFilter($event)"  #input>
+    <input matInput (keyup)="applyFilter($event)" #input>
 </mat-form-field>
 
 <div class="mat-elevation-z8">
@@ -33,7 +33,7 @@
 
         
         <tr mat-header-row *matHeaderRowDef="columnsConfig"></tr>
-        <tr mat-row *matRowDef="let row; columns: columnsConfig;"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnsConfig;" (click)="onBookSelected(row)"></tr>
 
         <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
@@ -41,5 +41,5 @@
     </table>
 
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>

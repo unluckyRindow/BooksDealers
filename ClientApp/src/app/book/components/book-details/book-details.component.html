@@ -1,0 +1,27 @@
+<div mat-dialog-title class="custom-title">{{ data.book.title }}</div>
+
+<div mat-dialog-content class="default-font">
+    <div id="author-label">
+        by {{ data.book.author }}
+    </div>
+    <div class="additional-info">
+        {{ data.book.releaseDate }}
+    </div>
+    <div id="description" class="additional-info">
+        {{ data.book.description }}
+    </div>
+    <div class="owner-info">
+        Owned by: {{ data.book.owner }}
+    </div>
+    <div class="owner-info">
+        Published: {{ data.book.releaseDate }}
+    </div>
+    
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button color="custom-button" (click)="onClose()">Close</button>
+    <button *ngIf="!data.isOwner" mat-button color="custom-button" (click)="onTrade()">Ask for trade</button>
+    <button *ngIf="data.isOwner" mat-button color="custom-button" (click)="onEdit()">Edit</button>
+    <button *ngIf="data.isOwner" mat-button color="custom-button" (click)="onDelete()">Delete</button>
+</div>
