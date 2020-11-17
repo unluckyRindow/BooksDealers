@@ -3,6 +3,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Book, BookStatus, LiteraryGenre } from '../../models/book.model';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { BookDetailsComponent } from '../book-details/book-details.component';
+
 
 @Component({
   selector: 'app-books-list',
@@ -62,7 +65,9 @@ export class BooksListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() { }
+  constructor(
+    public dialog: MatDialog,
+  ) { }
 
   ngOnInit(): void {
   }
@@ -73,11 +78,23 @@ export class BooksListComponent implements OnInit {
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    const keyword = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = keyword.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  onBookSelected(bookSelected: Book): void {
+    // check if selected book belongs to user to display trade/ edit delete
+    let isOwner = false;
+
+    this.dialog.open(BookDetailsComponent, {
+      data: {
+        book: bookSelected,
+        isOwner,
+      }
+    })
   }
 }
