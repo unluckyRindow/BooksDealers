@@ -7,7 +7,10 @@
         "ERROR": "*Invalid login or password, try again",
         "OR": "or",
         "REGISTRATION": "Sign up",
-        "CANCEL": "Cancel"
+        "CANCEL": "Cancel",
+        "NAME": "Name",
+        "EMAIL": "Email",
+        "PASSWORD_CONFIRM": "Confirm password"
     },
     "HEADER" : {
         "HOME": "HOME",

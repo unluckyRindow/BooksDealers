@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { Book, BookStatus, LiteraryGenre } from '../../models/book.model';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BookDetailsComponent } from '../book-details/book-details.component';
+import { MockedService } from 'src/app/mocked/mocked.service';
 
 
 @Component({
@@ -14,51 +15,15 @@ import { BookDetailsComponent } from '../book-details/book-details.component';
 })
 export class BooksListComponent implements OnInit {
 
-  // tslint:disable
-  readonly MOCKED_BOOKS_LIST: Book[] = [
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-    {id: '1', owner: 'John Doe Owner', status: BookStatus.Public, title: 'SomeTitle', author: 'John Doe Author', category: LiteraryGenre.Fiction, releaseDate: '11-11-2011', creationDate: '12-11-2020', description: 'Books description goes brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr'},
-  ];
+
+  @Input()
+  booksList: Book[];
+
+  @Input()
+  isUserBooksList = false;
 
 
-  dataSource = new MatTableDataSource(this.MOCKED_BOOKS_LIST);
+  dataSource: MatTableDataSource<Book>;
   columnsConfig: string[] = ['title', 'author', 'category', 'releaseDate', 'creationDate'];
 
 
@@ -67,17 +32,22 @@ export class BooksListComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
+    public mockedService: MockedService,
   ) { }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
+    // mocked without backend, depending if global or user books fetch proper data
+    if (this.isUserBooksList) {
+      this.booksList = this.mockedService.userBooks;
+    } else {
+      this.booksList = this.mockedService.books;
+    }
+    this.dataSource = new MatTableDataSource(this.booksList);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
+  applyFilter(event: Event): void {
     const keyword = (event.target as HTMLInputElement).value;
     this.dataSource.filter = keyword.trim().toLowerCase();
 
@@ -88,13 +58,13 @@ export class BooksListComponent implements OnInit {
 
   onBookSelected(bookSelected: Book): void {
     // check if selected book belongs to user to display trade/ edit delete
-    let isOwner = false;
+    const isOwner = false;
 
     this.dialog.open(BookDetailsComponent, {
       data: {
         book: bookSelected,
         isOwner,
       }
-    })
+    });
   }
 }

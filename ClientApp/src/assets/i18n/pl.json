@@ -7,7 +7,10 @@
         "ERROR": "*Błędny login lub hasło, spróbuj ponownie",
         "OR": "lub",
         "REGISTRATION": "Rejestracja",
-        "CANCEL": "Anuluj"
+        "CANCEL": "Anuluj",
+        "NAME": "Nazwa uytkownika",
+        "EMAIL": "Email",
+        "PASSWORD_CONFIRM": "Potwierdź hasło"
     },
     "HEADER" : {
         "HOME": "STRONA GŁÓWNA",

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
 import { Observable, of, Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { RegistrationData, LoginData } from '../models/user.model';
 
 
 @Injectable({
@@ -12,7 +13,7 @@ export class AuthService {
   authenticationChanged = new Subject<boolean>();
 
   // mocked login data
-  loginData = {login: 'login', pass: 'admin'};
+  loginData = {login: 'admin', pass: 'admin'};
 
   constructor(
     private tokenService: TokenService,
@@ -23,13 +24,17 @@ export class AuthService {
     return this.tokenService.isAuthenticated();
   }
 
-  authenticate(login: string, password: string): Observable<any> {
-    if (login === this.loginData.login && password === this.loginData.pass) {
+  authenticate(loginData: LoginData): Observable<any> {
+    if (loginData.login === this.loginData.login && loginData.password === this.loginData.pass) {
       this.tokenService.authenticated = true;
       this.authenticationChanged.next(true);
       return of(true);
     }
     return of(false);
+  }
+
+  register(data: RegistrationData): Observable<any> {
+    return of(true);
   }
 
   logout(): void {
