@@ -5,6 +5,8 @@ import { UserBooksListComponent } from './components/user-books-list/user-books-
 import { MaterialModule } from '../material/material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { BookDetailsComponent } from './components/book-details/book-details.component';
+import { MockedService } from '../mocked/mocked.service';
+
 
 
 
@@ -18,6 +20,9 @@ import { BookDetailsComponent } from './components/book-details/book-details.com
   exports: [
     BooksListComponent,
     UserBooksListComponent
+  ],
+  providers: [
+    MockedService
   ]
 })
 export class BookModule { }
