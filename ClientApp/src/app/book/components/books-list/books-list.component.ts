@@ -8,6 +8,7 @@ import { BookDetailsComponent } from '../book-details/book-details.component';
 import { MockedService } from 'src/app/mocked/mocked.service';
 
 
+
 @Component({
   selector: 'app-books-list',
   templateUrl: './books-list.component.html',
@@ -24,6 +25,7 @@ export class BooksListComponent implements OnInit {
 
 
   dataSource: MatTableDataSource<Book>;
+
   columnsConfig: string[] = ['title', 'author', 'category', 'releaseDate', 'creationDate'];
 
 
