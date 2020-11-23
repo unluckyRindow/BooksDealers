@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" (keyup.enter)="this.registrationMode && this.signUpGroup.valid ? onSignUp() : onSignIn()">
     <div class="login-container">
         <div *ngIf="!registrationMode; else registrationPage">
             <div class="default-header">{{ 'LOGIN.SIGN_IN' | translate}}</div>
@@ -41,7 +41,7 @@
                 </span>
                 {{ 'LOGIN.OR' | translate}}
                 <span class="button-wrapper">
-                    <button mat-stroked-button color="custom-stroked-button" (click)="onSignUp()">{{ 'LOGIN.SIGN_UP' | translate}}</button>
+                    <button mat-stroked-button (click)="onSignUp()">{{ 'LOGIN.SIGN_UP' | translate}}</button>
                 </span>
             </div>
         </div>
@@ -93,16 +93,16 @@
                 </div>
             </div>
 
-            <div *ngIf="invalidLoginAttempt" id="errorMessage">
+            <div *ngIf="invalidRegistrationAttempt" id="errorMessage">
                 {{ 'LOGIN.ERROR_REGISTRATION' | translate}}
             </div>
 
             <div class="button-panel">
                 <span class="button-wrapper">
-                    <button mat-raised-button color="custom-raised-button" (click)="onSignUp()">{{ 'LOGIN.SIGN_UP' | translate}}</button>
+                    <button mat-raised-button color="custom-raised-button" (click)="onSignUp()" [disabled]="this.registrationMode && this.signUpGroup.invalid">{{ 'LOGIN.SIGN_UP' | translate}}</button>
                 </span>
                 <span class="button-wrapper">
-                    <button mat-stroked-button color="custom-stroked-button" (click)="onCancel()">{{ 'LOGIN.CANCEL' | translate}}</button>
+                    <button mat-stroked-button (click)="onCancel()">{{ 'LOGIN.CANCEL' | translate}}</button>
                 </span>
             </div>
         </ng-template>

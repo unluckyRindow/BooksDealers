@@ -105,6 +105,7 @@ export class LoginComponent implements OnInit {
   onCancel(): void {
     this.router.navigate(['/login']);
     this.registrationMode = false;
+    this.signUpGroup.reset();
   }
 
   // TODO fix not applying validator below

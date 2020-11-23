@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { BookEditComponent } from '../book-edit/book-edit.component';
 
 @Component({
   selector: 'app-user-books-list',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserBooksListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialog: MatDialog,
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  // add new book
+  onAdd(): void {
+    this.dialog.open(BookEditComponent, {data: {
+      editMode: false
+    }});
   }
 
 }

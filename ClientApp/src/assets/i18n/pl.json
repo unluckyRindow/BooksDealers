@@ -4,7 +4,8 @@
         "LOGIN": "Login",
         "PASSWORD": "Hasło",
         "SIGN_UP": "Zarejestruj się",
-        "ERROR": "*Błędny login lub hasło, spróbuj ponownie",
+        "ERROR_LOGIN": "Błędny login lub hasło, spróbuj ponownie",
+        "ERROR_REGISTRATION": "Rejestracja nie powiodła się, spróbuj ponownie",
         "OR": "lub",
         "REGISTRATION": "Rejestracja",
         "CANCEL": "Anuluj",
@@ -27,5 +28,8 @@
         "CHANGE_LANGUAGE" : "Zmień język",
         "LANGUAGE": "Język",
         "SAVE": "Zapisz"
+    },
+    "BOOKS_LIST" : {
+        "ADD": "Dodaj"
     }
 }

@@ -60,7 +60,7 @@ export class BooksListComponent implements OnInit {
 
   onBookSelected(bookSelected: Book): void {
     // check if selected book belongs to user to display trade/ edit delete
-    const isOwner = false;
+    const isOwner = true;
 
     this.dialog.open(BookDetailsComponent, {
       data: {

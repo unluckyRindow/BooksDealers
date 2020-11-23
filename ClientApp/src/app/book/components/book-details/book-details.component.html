@@ -20,8 +20,8 @@
 </div>
 
 <div mat-dialog-actions>
-    <button mat-button color="custom-button" (click)="onClose()">Close</button>
     <button *ngIf="!data.isOwner" mat-button color="custom-button" (click)="onTrade()">Ask for trade</button>
     <button *ngIf="data.isOwner" mat-button color="custom-button" (click)="onEdit()">Edit</button>
     <button *ngIf="data.isOwner" mat-button color="custom-button" (click)="onDelete()">Delete</button>
+    <button mat-stroked-button color="custom-stroked-button"  (click)="onClose()">Close</button>
 </div>

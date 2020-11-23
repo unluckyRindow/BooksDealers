@@ -2,13 +2,12 @@ export interface Book {
     id: string;
     owner: string;
     status: BookStatus;
-
     title: string;
     author: string;
     category: LiteraryGenre;
     releaseDate: string;
     creationDate: string;
-    description: string;
+    description?: string;
 }
 
 // TODO add all books categories
@@ -18,6 +17,16 @@ export enum LiteraryGenre {
 }
 
 export enum BookStatus {
-    Public = 'PRIVATE',
+    Public = 'PUBLIC',
     Private = 'PRIVATE'
+}
+
+export interface BookCreateData {
+    owner: string;
+    status: BookStatus;
+    title: string;
+    author: string;
+    category: LiteraryGenre;
+    releaseDate: string;
+    description?: string;
 }

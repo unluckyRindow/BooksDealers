@@ -1,0 +1,18 @@
+.mat-dialog-content {
+    min-width: 500px !important;
+}
+
+.book-edit-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px 50px;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.radio-wrapper {
+    padding-right: 10px;
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Book } from '../../models/book.model';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { BookEditComponent, BookEditData } from '../book-edit/book-edit.component';
 
 export interface BookDetailsData{
   book: Book;
@@ -19,7 +20,8 @@ export class BookDetailsComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<BookDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: BookDetailsData
+    @Inject(MAT_DIALOG_DATA) public data: BookDetailsData,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -31,7 +33,11 @@ export class BookDetailsComponent implements OnInit {
 
   // init edit
   onEdit(): void{
-
+    this.dialog.open(BookEditComponent, {data: {
+      editMode: true,
+      book: this.book
+    } as BookEditData}
+    );
   }
 
   // delete item

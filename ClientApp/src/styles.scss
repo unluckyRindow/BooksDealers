@@ -15,6 +15,11 @@
     font-size: 20px;;
 }
 
+.mat-custom-stroked-button {
+    color: #373a40;
+    font-size: 20px;;
+}
+
 .custom-title {
     font-size: 40px;
     padding: 10px;
@@ -46,6 +51,19 @@
 
 .mat-selected {
     color: black !important;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+    border-color:#373a40; 
+}
+  
+.mat-radio-button.mat-accent .mat-radio-inner-circle{
+    color:#373a40;
+    background-color:#373a40 ;
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    background-color:rgba(37, 32, 32, 0.26);
 }
 
 
