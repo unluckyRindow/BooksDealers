@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BooksDealersAPI.Models;
 using BooksDealersAPI.Repository;
+using BooksDealersAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,19 +16,19 @@ namespace BooksDealersAPI.Controllers
     [Route("api/books")]
     public class BooksController : Controller
     {
-        private readonly IBooksDealersRepository _booksDealersRepository;
+        private readonly IBookService _bookService;
 
         public BooksController(
-                IBooksDealersRepository booksDealersRepository
+                IBookService bookService
             )
         {
-            _booksDealersRepository = booksDealersRepository;
+            _bookService = bookService;
         }
 
         [HttpGet]
-        public IActionResult Books()
+        public  IActionResult Books()
         {
-            return Ok(_booksDealersRepository.GetAllBooks());
+            return Ok(_bookService.GetAllBooks());
         }
     }
     

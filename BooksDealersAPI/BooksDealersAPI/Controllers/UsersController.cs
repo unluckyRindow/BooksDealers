@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BooksDealersAPI.FrontendModels;
 using BooksDealersAPI.Models;
+using BooksDealersAPI.Services;
 using BooksDealersAPI.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -18,10 +19,15 @@ namespace BooksDealersAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly JWTSettings _jwtSettings;
+        private readonly IUserService _userService;
 
-        public UsersController(IOptions<JWTSettings> jwtSettings)
+        public UsersController(
+            IOptions<JWTSettings> jwtSettings,
+            IUserService userService
+            )
         {
             _jwtSettings = jwtSettings.Value;
+            _userService = userService;
         }
 
 
@@ -29,8 +35,6 @@ namespace BooksDealersAPI.Controllers
         [Route("login")]
         public async Task<ActionResult<UserWithToken>> Login([FromBody] UserLoginData user)
         {
-
-
 
             UserWithToken userWithToken = new UserWithToken()
             {
@@ -44,12 +48,12 @@ namespace BooksDealersAPI.Controllers
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
-             var key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey);
+            var key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                  {
-                     new Claim(ClaimTypes.Name, user.Login)
+                     new Claim(ClaimTypes.Name, user.Login),
                  }),
                 Expires = DateTime.UtcNow.AddMonths(6),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
