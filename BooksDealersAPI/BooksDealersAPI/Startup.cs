@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BooksDealersAPI.Repository;
+using BooksDealersAPI.Services;
 using BooksDealersAPI.Shared;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -36,6 +37,9 @@ namespace BooksDealersAPI
             services.AddMvc();
 
             services.AddScoped<IBooksDealersRepository, BooksDealersRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IBookService, BookService>();
+            services.AddScoped<ITradeService, TradeService>();
 
             var jwtSection = _configuration.GetSection("JWTSettings");
             services.Configure<JWTSettings>(jwtSection);
