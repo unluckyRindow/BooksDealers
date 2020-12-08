@@ -6,6 +6,10 @@ namespace BooksDealersAPI.Services
 {
     public interface IBookService
     {
-        public IEnumerable<Book> GetAllBooks();
+        Book GetBook(int Id);
+        IEnumerable<Book> GetAllBooks();
+        IEnumerable<Book> GetAllBooksByOwner(int ownerId);
+        bool AddBook(Book book);
+        bool UpdateBook(Book book, int id);
     }
 }

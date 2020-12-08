@@ -8,13 +8,13 @@ namespace BooksDealersAPI.Models
         public int Id { get; set; }
         public string Status { get; set; }
 
-        public int InitiatiorId { get; set; }
-        public int InitiatorOffer { get; set; }
+        public User Initiatior { get; set; }
+        //public Book InitiatorOffer { get; set; }
 
-        public int TargetOwnerId { get; set; }
-        public int TargetId { get; set; }
+        //public User TargetOwner { get; set; }
+        public Book Target { get; set; }
 
-        ICollection<Comment> Comments = new List<Comment>();
+        ICollection<Comment> Comments { get; set; }
 
     }
 }

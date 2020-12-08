@@ -26,10 +26,45 @@ namespace BooksDealersAPI.Controllers
         }
 
         [HttpGet]
-        public  IActionResult Books()
+        public IActionResult Books()
         {
             return Ok(_bookService.GetAllBooks());
         }
+
+        [HttpGet("user-books/{id}")]
+        public IActionResult UserBooks(int id)
+        {
+            return Ok(_bookService.GetAllBooksByOwner(id));
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Book(int id)
+        {
+            return Ok(_bookService.GetBook(id));
+        }
+
+        [HttpPost]
+        public IActionResult AddBook([FromBody] Book book)
+        {
+            bool created = _bookService.AddBook(book);
+            if (created)
+            {
+                return CreatedAtAction("Book", new { id = book.Id }, book);
+            }
+            return BadRequest();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateBook([FromBody] Book book, int id)
+        {
+            bool updated = _bookService.UpdateBook(book, id);
+            if (updated)
+            {
+                return NoContent();
+            }
+            return NotFound();
+        }
+
     }
     
 }
