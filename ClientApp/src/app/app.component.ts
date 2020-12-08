@@ -20,9 +20,7 @@ export class AppComponent implements OnInit {
     this.authService.authenticationChanged
       .pipe(untilDestroyed(this))
       .subscribe(x => {
-        if (x) {
-          this.isAuthenticated = this.authService.isAuthenticated();
-        }
+        this.isAuthenticated = this.authService.isAuthenticated();
       });
   }
 }

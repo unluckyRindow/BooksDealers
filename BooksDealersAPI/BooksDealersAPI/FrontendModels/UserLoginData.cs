@@ -5,6 +5,6 @@ namespace BooksDealersAPI.FrontendModels
     {
 
         public string Login { get; set; }
-        public string Passowrd { get; set; }
+        public string Password { get; set; }
     }
 }

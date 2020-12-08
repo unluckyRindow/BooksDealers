@@ -27,7 +27,7 @@ namespace BooksDealersAPI.Services
         {
             User foundUser = _booksDealersRepository.GetUserByLogin(user.Login);
 
-            if(foundUser == null || user.Passowrd != user.Passowrd)
+            if(foundUser == null || foundUser.Password != user.Password)
             {
                 return null;
             }

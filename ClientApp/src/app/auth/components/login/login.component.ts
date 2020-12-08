@@ -78,7 +78,11 @@ export class LoginComponent implements OnInit {
           } else {
             this.invalidLoginAttempt = true;
           }
-        });
+        },
+        err => {
+          this.invalidLoginAttempt = true;
+        }
+        );
     }
   }
 
@@ -93,7 +97,7 @@ export class LoginComponent implements OnInit {
           if (res) {
             this.invalidRegistrationAttempt = false;
             this.registrationMode = false;
-            this.router.navigate(['/login']);
+            this.router.navigate(['/home']);
             this.signUpGroup.reset();
           } else {
             this.invalidRegistrationAttempt = true;
