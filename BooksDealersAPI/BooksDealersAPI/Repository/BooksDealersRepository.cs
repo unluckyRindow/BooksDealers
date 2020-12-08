@@ -1,26 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BooksDealersAPI.Models;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace BooksDealersAPI.Repository
 {
     public class BooksDealersRepository : IBooksDealersRepository
     {
-        public BooksDealersRepository()
+        private readonly BooksDealersContext _context;
+
+        public BooksDealersRepository(BooksDealersContext context)
         {
-            // inject context here in future
+            _context = context;
         }
 
 
+        public Book GetBook(int Id)
+        {
+            return _context.Books
+                .Include(x => x.Owner)
+                .Where(x => x.Id == Id)
+                .FirstOrDefault();
+        }
+
         public IEnumerable<Book> GetAllBooks()
         {
-            return new List<Book>
-            {
-                new Book {Id=1, Author="John Author1", CreationDate=DateTime.Now, Title="Title1"},
-                new Book {Id=2, Author="John Author2", CreationDate=DateTime.Now, Title="Title2"},
-                new Book {Id=3, Author="John Author3", CreationDate=DateTime.Now, Title="Title3"},
-                new Book {Id=4, Author="John Author4", CreationDate=DateTime.Now, Title="Title4"},
-            };
+            return _context.Books
+                .Include(x => x.Owner)
+                .OrderBy(x => x.Title)
+                .ToList();
+
+        }
+
+        public IEnumerable<Book> GetAllBooksByOwner(int ownerId)
+        {
+            return _context.Books
+                .Include(x => x.Owner)
+                .Where(x => x.Owner.Id == ownerId)
+                .OrderBy(x => x.Title)
+                .ToList();
+        }
+
+        public void AddBook(Book book)
+        {
+            _context.Books.Add(book);
+        }
+
+        public void UpdateBook(Book book)
+        {
+            _context.Entry(book).State = EntityState.Modified;
+        }
+
+        public bool Save()
+        {
+            return (_context.SaveChanges() >= 0);
         }
     }
 }
