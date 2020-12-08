@@ -31,37 +31,29 @@ namespace BooksDealersAPI.Controllers
         }
 
 
-        [HttpPost]
-        [Route("login")]
-        public async Task<ActionResult<UserWithToken>> Login([FromBody] UserLoginData user)
+        [HttpPost("login")]
+        public ActionResult<UserWithToken> Login([FromBody] UserLoginData user)
         {
 
-            UserWithToken userWithToken = new UserWithToken()
-            {
-                Id = 1,
-                Name = "John with token"
-            };
+            UserWithToken userWithToken = _userService.Login(user);
 
             if (userWithToken == null)
             {
                 return NotFound();
             }
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                 {
-                     new Claim(ClaimTypes.Name, user.Login),
-                 }),
-                Expires = DateTime.UtcNow.AddMonths(6),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha256Signature)
-            };
+            return userWithToken;
+        }
 
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            userWithToken.Token = tokenHandler.WriteToken(token);
+        [HttpPost("register")]
+        public ActionResult<UserWithToken> Register ([FromBody] UserRegisterData user)
+        {
+            UserWithToken userWithToken = _userService.Register(user);
+
+            if (userWithToken == null)
+            {
+                return BadRequest();
+            }
 
             return userWithToken;
         }

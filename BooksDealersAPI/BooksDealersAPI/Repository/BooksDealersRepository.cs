@@ -53,6 +53,22 @@ namespace BooksDealersAPI.Repository
             _context.Entry(book).State = EntityState.Modified;
         }
 
+
+
+        public void AddUser(User user)
+        {
+            _context.Users.Add(user);
+        }
+
+        public User GetUserByLogin(string login)
+        {
+            return _context.Users
+                 .Where(x => x.Login == login)
+                 .FirstOrDefault();
+        }
+
+
+
         public bool Save()
         {
             return (_context.SaveChanges() >= 0);
