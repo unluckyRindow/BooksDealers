@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using BooksDealersAPI.FrontendModels;
 using BooksDealersAPI.Models;
 
 namespace BooksDealersAPI.Repository
@@ -12,5 +13,7 @@ namespace BooksDealersAPI.Repository
         void AddBook(Book book);
         void UpdateBook(Book book);
         bool Save();
+        void AddUser(User user);
+        User GetUserByLogin(string login);
     }
 }

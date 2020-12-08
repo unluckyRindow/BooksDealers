@@ -1,16 +1,71 @@
 ﻿using System;
+using BooksDealersAPI.FrontendModels;
+using BooksDealersAPI.Models;
 using BooksDealersAPI.Repository;
+using BooksDealersAPI.Shared;
+using Microsoft.Extensions.Options;
 
 namespace BooksDealersAPI.Services
 {
     public class UserService : IUserService
     {
-        private IBooksDealersRepository _booksDealersRepository;
+        private readonly IBooksDealersRepository _booksDealersRepository;
+        private readonly JWTSettings _jwtSettings;
+        private TokenHelper tokenHelper = new TokenHelper();
 
-
-        public UserService(IBooksDealersRepository booksDealersRepository)
+        public UserService(
+            IBooksDealersRepository booksDealersRepository,
+            IOptions<JWTSettings> jwtSettings
+            )
         {
             _booksDealersRepository = booksDealersRepository;
+            _jwtSettings = jwtSettings.Value;
+        }
+
+
+        public UserWithToken Login(UserLoginData user)
+        {
+            User foundUser = _booksDealersRepository.GetUserByLogin(user.Login);
+
+            if(foundUser == null || user.Passowrd != user.Passowrd)
+            {
+                return null;
+            }
+
+            UserWithToken userWithToken = new UserWithToken()
+            {
+                Id = foundUser.Id,
+                Name = foundUser.Name,
+            };
+
+            userWithToken.Token = tokenHelper.CreateToken(foundUser.Id, foundUser.Name, _jwtSettings.SecretKey);
+
+            return userWithToken;
+        }
+
+
+        public UserWithToken Register(UserRegisterData user)
+        {
+            User createdUser = new User()
+            {
+                Id = IdHelper.GetNewId(),
+                Name = user.Name,
+                Email = user.Email,
+                Login = user.Login,
+                Password = user.Password
+            };
+
+            _booksDealersRepository.AddUser(createdUser);
+            _booksDealersRepository.Save();
+
+            UserWithToken userWithToken = new UserWithToken()
+            {
+                Id = createdUser.Id,
+                Name = createdUser.Name,
+            };
+            userWithToken.Token = tokenHelper.CreateToken(createdUser.Id, createdUser.Name, _jwtSettings.SecretKey);
+
+            return userWithToken;
         }
     }
 }

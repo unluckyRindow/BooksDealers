@@ -11,8 +11,8 @@ namespace BooksDealersAPI.Models
         public string Password { get; set; }
         public string Email { get; set; }
 
-        public ICollection<Book> UserBooks { get; set; }
-        public ICollection<Trade> UserTrades { get; set; }
+        public ICollection<Book> UserBooks { get; set; } = new List<Book>();
+        public ICollection<Trade> UserTrades { get; set; } = new List<Trade>();
 
     }
 }
