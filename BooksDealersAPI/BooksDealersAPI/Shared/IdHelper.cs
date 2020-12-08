@@ -3,7 +3,7 @@ namespace BooksDealersAPI.Shared
 {
     public static class IdHelper
     {
-        private static int Id = 1;
+        private static int Id = 3;
 
         public static int GetNewId()
         {

@@ -3,7 +3,10 @@ import { TokenService } from './token.service';
 import { Observable, of, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { RegistrationData, LoginData } from '../models/user.model';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from './../../../environments/environment';
+import { untilDestroyed } from '@ngneat/until-destroy';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -11,14 +14,13 @@ import { RegistrationData, LoginData } from '../models/user.model';
 })
 export class AuthService {
 
+  readonly API_URL = environment.config.PathApi;
   authenticationChanged = new Subject<boolean>();
-
-  // mocked login data
-  loginData = {login: 'admin', pass: 'admin'};
 
   constructor(
     private tokenService: TokenService,
     private router: Router,
+    private http: HttpClient,
   ) { }
 
   isAuthenticated(): boolean {
@@ -26,21 +28,43 @@ export class AuthService {
   }
 
   authenticate(loginData: LoginData): Observable<any> {
-    if (loginData.login === this.loginData.login && loginData.password === this.loginData.pass) {
-      this.tokenService.authenticated = true;
-      this.authenticationChanged.next(true);
-      return of(true);
-    }
-    return of(false);
+    return this.http.post(this.API_URL + 'api/users/login', JSON.stringify(loginData), this.GetHeaders())
+      .pipe(
+        map((x: any) => {
+          if (x) {
+            this.tokenService.setToken(x.token);
+          }
+          this.authenticationChanged.next(true);
+          return x;
+        })
+      );
   }
 
-  register(data: RegistrationData): Observable<any> {
-    return of(true);
+  register(registrationData: RegistrationData): Observable<any> {
+    return this.http.post(this.API_URL + 'api/users/register', JSON.stringify(registrationData), this.GetHeaders())
+    .pipe(
+      map((x: any) => {
+        if (x) {
+          this.tokenService.setToken(x.token);
+        }
+        this.authenticationChanged.next(true);
+        return x;
+      })
+    );
   }
 
   logout(): void {
-    this.tokenService.authenticated = false;
+    this.tokenService.removeToken();
     this.authenticationChanged.next(true);
     this.router.navigate(['/login']);
+  }
+
+  GetHeaders(): any {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.tokenService.getToken()}`
+      })
+    };
   }
 }
