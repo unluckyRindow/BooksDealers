@@ -13,8 +13,11 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-
   readonly API_URL = environment.config.PathApi;
+
+  // tslint:disable:variable-name
+  private _userId: number;
+  private _userName: string;
   authenticationChanged = new Subject<boolean>();
 
   constructor(
@@ -22,6 +25,14 @@ export class AuthService {
     private router: Router,
     private http: HttpClient,
   ) { }
+
+  get userId(): number {
+    return this._userId;
+  }
+
+  get userName(): string {
+    return this._userName;
+  }
 
   isAuthenticated(): boolean {
     return this.tokenService.isAuthenticated();
@@ -33,6 +44,8 @@ export class AuthService {
         map((x: any) => {
           if (x) {
             this.tokenService.setToken(x.token);
+            this._userId = x.id;
+            this._userName = x.name;
           }
           this.authenticationChanged.next(true);
           return x;
@@ -46,6 +59,8 @@ export class AuthService {
       map((x: any) => {
         if (x) {
           this.tokenService.setToken(x.token);
+          this._userId = x.id;
+          this._userName = x.name;
         }
         this.authenticationChanged.next(true);
         return x;
