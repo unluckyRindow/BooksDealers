@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BooksDealersAPI.FrontendModels;
 using BooksDealersAPI.Models;
 
 namespace BooksDealersAPI.Services
@@ -9,7 +10,8 @@ namespace BooksDealersAPI.Services
         Book GetBook(int Id);
         IEnumerable<Book> GetAllBooks();
         IEnumerable<Book> GetAllBooksByOwner(int ownerId);
-        bool AddBook(Book book);
-        bool UpdateBook(Book book, int id);
+        bool AddBook(BookViewModel book);
+        bool UpdateBook(BookViewModel books);
+        bool DeleteBook(int id);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BooksDealersAPI.FrontendModels;
 using BooksDealersAPI.Models;
 using BooksDealersAPI.Repository;
 
@@ -14,8 +15,21 @@ namespace BooksDealersAPI.Services
             _booksDealersRepository = booksDealersRepository;
         }
 
-        public bool AddBook(Book book)
+        public bool AddBook(BookViewModel bookViewModel)
         {
+            User owner = _booksDealersRepository.GetUserById(bookViewModel.OwnerId);
+            Book book = new Book()
+            {
+                Id = bookViewModel.Id,
+                Owner = owner,
+                Status = bookViewModel.Status,
+                Title = bookViewModel.Title,
+                Author = bookViewModel.Author,
+                Category = bookViewModel.Category,
+                ReleaseDate = bookViewModel.ReleaseDate,
+                CreationDate = bookViewModel.CreationDate,
+                Description = bookViewModel.Description
+            };
             _booksDealersRepository.AddBook(book);
             return _booksDealersRepository.Save();
         }
@@ -35,9 +49,28 @@ namespace BooksDealersAPI.Services
             return _booksDealersRepository.GetBook(Id);
         }
 
-        public bool UpdateBook(Book book, int id)
+        public bool UpdateBook(BookViewModel bookViewModel)
         {
+            User owner = _booksDealersRepository.GetUserById(bookViewModel.OwnerId);
+            Book book = new Book()
+            {
+                Id = bookViewModel.Id,
+                Owner = owner,
+                Status = bookViewModel.Status,
+                Title = bookViewModel.Title,
+                Author = bookViewModel.Author,
+                Category = bookViewModel.Category,
+                ReleaseDate = bookViewModel.ReleaseDate,
+                CreationDate = bookViewModel.CreationDate,
+                Description = bookViewModel.Description
+            };
             _booksDealersRepository.UpdateBook(book);
+            return _booksDealersRepository.Save();
+        }
+
+        public bool DeleteBook(int id)
+        {
+            _booksDealersRepository.DeleteBook(id);
             return _booksDealersRepository.Save();
         }
     }

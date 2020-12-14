@@ -50,7 +50,14 @@ namespace BooksDealersAPI.Repository
 
         public void UpdateBook(Book book)
         {
-            _context.Entry(book).State = EntityState.Modified;
+            _context.Update(book);
+        }
+
+        public void DeleteBook(int id)
+        {
+            Book book = new Book() { Id = id };
+            _context.Books.Attach(book);
+            _context.Books.Remove(book);
         }
 
 
@@ -67,6 +74,12 @@ namespace BooksDealersAPI.Repository
                  .FirstOrDefault();
         }
 
+        public User GetUserById(int id)
+        {
+            return _context.Users
+                 .Where(x => x.Id == id)
+                 .FirstOrDefault();
+        }
 
 
         public bool Save()

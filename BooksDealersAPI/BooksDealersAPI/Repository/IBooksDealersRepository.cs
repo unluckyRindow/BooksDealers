@@ -12,8 +12,10 @@ namespace BooksDealersAPI.Repository
         IEnumerable<Book> GetAllBooksByOwner(int ownerId);
         void AddBook(Book book);
         void UpdateBook(Book book);
+        void DeleteBook(int id);
         bool Save();
         void AddUser(User user);
         User GetUserByLogin(string login);
+        User GetUserById(int id);
     }
 }

@@ -13,6 +13,5 @@ namespace BooksDealersAPI.Models
 
         public ICollection<Book> UserBooks { get; set; } = new List<Book>();
         public ICollection<Trade> UserTrades { get; set; } = new List<Trade>();
-
     }
 }
