@@ -11,5 +11,17 @@ namespace BooksDealersAPI.Repository
         public DbSet<User> Users { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Trade> Trades { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Book>()
+                .HasOne(o => o.Owner)
+                .WithMany(b => b.UserBooks);
+
+            modelBuilder.Entity<Trade>()
+                .HasOne(u => u.Initiatior)
+                .WithMany(t => t.UserTrades);
+        }
     }
 }

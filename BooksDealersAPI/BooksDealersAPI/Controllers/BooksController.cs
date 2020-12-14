@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BooksDealersAPI.FrontendModels;
 using BooksDealersAPI.Models;
 using BooksDealersAPI.Repository;
 using BooksDealersAPI.Services;
@@ -44,7 +45,7 @@ namespace BooksDealersAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddBook([FromBody] Book book)
+        public IActionResult AddBook([FromBody] BookViewModel book)
         {
             bool created = _bookService.AddBook(book);
             if (created)
@@ -55,9 +56,9 @@ namespace BooksDealersAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateBook([FromBody] Book book, int id)
+        public IActionResult UpdateBook([FromBody] BookViewModel book, int id)
         {
-            bool updated = _bookService.UpdateBook(book, id);
+            bool updated = _bookService.UpdateBook(book);
             if (updated)
             {
                 return NoContent();
@@ -65,6 +66,16 @@ namespace BooksDealersAPI.Controllers
             return NotFound();
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult DeleteBook(int id)
+        {
+            bool deleted = _bookService.DeleteBook(id);
+            if (deleted)
+            {
+                return Ok();
+            }
+            return NotFound();
+        }
     }
     
 }

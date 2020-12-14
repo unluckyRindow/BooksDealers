@@ -37,6 +37,11 @@ namespace BooksDealersAPI
 
             services.AddMvc();
 
+            services.AddControllersWithViews()
+                    .AddNewtonsoftJson(options =>
+                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+
             services.AddScoped<IBooksDealersRepository, BooksDealersRepository>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IBookService, BookService>();
