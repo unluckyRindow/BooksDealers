@@ -2,12 +2,15 @@ import { Component, OnInit, Input, Inject } from '@angular/core';
 import { Book } from '../../models/book.model';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { BookEditComponent, BookEditData } from '../book-edit/book-edit.component';
+import { BooksService } from '../../services/books.service';
+import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
 
 export interface BookDetailsData{
   book: Book;
   isOwner: boolean;
 }
 
+@UntilDestroy()
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
@@ -21,19 +24,21 @@ export class BookDetailsComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<BookDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: BookDetailsData,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private booksService: BooksService,
   ) { }
 
   ngOnInit(): void {
+    this.book = this.data.book;
   }
 
   onClose(): void {
-    this.dialogRef.close();
+    this.dialogRef.close(true);
   }
 
   // init edit
   onEdit(): void{
-    this.dialog.open(BookEditComponent, {data: {
+      this.dialog.open(BookEditComponent, {data: {
       editMode: true,
       book: this.book
     } as BookEditData}
@@ -42,7 +47,11 @@ export class BookDetailsComponent implements OnInit {
 
   // delete item
   onDelete(): void {
-
+    this.booksService.deleteBook(this.book.id)
+      .pipe(untilDestroyed(this))
+      .subscribe(x => {
+        this.dialogRef.close(true);
+      });
   }
 
   // init trade here or close and ask list for same

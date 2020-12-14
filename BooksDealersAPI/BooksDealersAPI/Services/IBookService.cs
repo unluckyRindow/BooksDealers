@@ -10,7 +10,7 @@ namespace BooksDealersAPI.Services
         Book GetBook(int Id);
         IEnumerable<Book> GetAllBooks();
         IEnumerable<Book> GetAllBooksByOwner(int ownerId);
-        bool AddBook(BookViewModel book);
+        bool AddBook(BookAddModel book);
         bool UpdateBook(BookViewModel books);
         bool DeleteBook(int id);
     }

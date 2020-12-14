@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using BooksDealersAPI.FrontendModels;
 using BooksDealersAPI.Models;
 using BooksDealersAPI.Repository;
+using BooksDealersAPI.Shared;
 
 namespace BooksDealersAPI.Services
 {
@@ -15,20 +17,21 @@ namespace BooksDealersAPI.Services
             _booksDealersRepository = booksDealersRepository;
         }
 
-        public bool AddBook(BookViewModel bookViewModel)
+        public bool AddBook(BookAddModel bookAddModel)
         {
-            User owner = _booksDealersRepository.GetUserById(bookViewModel.OwnerId);
+            DateTime date = Convert.ToDateTime($"{bookAddModel.ReleaseDate}-01-01");
+            User owner = _booksDealersRepository.GetUserById(bookAddModel.OwnerId);
             Book book = new Book()
             {
-                Id = bookViewModel.Id,
+                Id = IdHelper.GetNewId(),
                 Owner = owner,
-                Status = bookViewModel.Status,
-                Title = bookViewModel.Title,
-                Author = bookViewModel.Author,
-                Category = bookViewModel.Category,
-                ReleaseDate = bookViewModel.ReleaseDate,
-                CreationDate = bookViewModel.CreationDate,
-                Description = bookViewModel.Description
+                Status = bookAddModel.Status,
+                Title = bookAddModel.Title,
+                Author = bookAddModel.Author,
+                Category = bookAddModel.Category,
+                ReleaseDate = date,
+                CreationDate = DateTime.Now,
+                Description = bookAddModel.Description
             };
             _booksDealersRepository.AddBook(book);
             return _booksDealersRepository.Save();

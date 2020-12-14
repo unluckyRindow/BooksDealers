@@ -45,12 +45,12 @@ namespace BooksDealersAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddBook([FromBody] BookViewModel book)
+        public IActionResult AddBook([FromBody] BookAddModel book)
         {
             bool created = _bookService.AddBook(book);
             if (created)
             {
-                return CreatedAtAction("Book", new { id = book.Id }, book);
+                return Ok();
             }
             return BadRequest();
         }

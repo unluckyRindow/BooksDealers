@@ -1,6 +1,6 @@
 export interface Book {
-    id: string;
-    owner: string;
+    id: number;
+    owner: OwnerData;
     status: BookStatus;
     title: string;
     author: string;
@@ -22,11 +22,16 @@ export enum BookStatus {
 }
 
 export interface BookCreateData {
-    owner: string;
+    ownerId: number;
     status: BookStatus;
     title: string;
     author: string;
     category: LiteraryGenre;
     releaseDate: string;
     description?: string;
+}
+
+export interface OwnerData {
+    id: number;
+    name: string;
 }
