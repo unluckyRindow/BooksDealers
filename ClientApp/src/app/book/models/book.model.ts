@@ -1,12 +1,12 @@
 export interface Book {
     id: number;
-    owner: OwnerData;
+    owner: UserData;
     status: BookStatus;
     title: string;
     author: string;
     category: LiteraryGenre;
-    releaseDate: string;
-    creationDate: string;
+    releaseDate: string | Date;
+    creationDate: string | Date;
     description?: string;
 }
 
@@ -27,11 +27,11 @@ export interface BookCreateData {
     title: string;
     author: string;
     category: LiteraryGenre;
-    releaseDate: string;
+    releaseDate: string | Date;
     description?: string;
 }
 
-export interface OwnerData {
+export interface UserData {
     id: number;
     name: string;
 }

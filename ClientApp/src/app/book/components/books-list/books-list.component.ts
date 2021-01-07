@@ -44,7 +44,6 @@ export class BooksListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-
   }
 
   applyFilter(event: Event): void {

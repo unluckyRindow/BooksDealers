@@ -1,13 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TradesListComponent } from './components/trades-list/trades-list.component';
+import { TradeDetailsComponent } from './components/trade-details/trade-details.component';
+import { MaterialModule } from '../material/material.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
-  declarations: [TradesListComponent],
+  declarations: [TradesListComponent, TradeDetailsComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule,
+    TranslateModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     TradesListComponent
