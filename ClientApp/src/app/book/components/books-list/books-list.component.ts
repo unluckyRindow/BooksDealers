@@ -10,6 +10,7 @@ import { BooksService } from '../../services/books.service';
 import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
 import { map, toArray } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Observable } from 'rxjs';
 
 
 @UntilDestroy()
@@ -19,6 +20,9 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   styleUrls: ['./books-list.component.scss']
 })
 export class BooksListComponent implements OnInit, AfterViewInit {
+  readonly COVERS_API_PREFIX = 'http://covers.openlibrary.org/b/isbn/';
+  readonly COVERS_API_SUFFIX = '-S.jpg';
+
   @Input()
   booksList: Book[];
   @Input()
@@ -26,7 +30,7 @@ export class BooksListComponent implements OnInit, AfterViewInit {
 
   dataSource: MatTableDataSource<Book>;
 
-  columnsConfig: string[] = ['title', 'author', 'category', 'releaseDate', 'creationDate'];
+  columnsConfig: string[] = ['cover', 'title', 'author', 'category', 'releaseDate', 'creationDate'];
 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -40,7 +44,30 @@ export class BooksListComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    this.reloadBooks();
+    this.loadBooks()
+      .pipe(
+        untilDestroyed(this),
+        map(books => books.map(book => {
+          book.releaseDate = new Date(book.releaseDate);
+          book.creationDate = new Date(book.creationDate);
+          if (book.owner) {
+            book.owner = {
+              id: book.owner.id,
+              name: book.owner.name,
+            };
+          }
+          return book;
+        })),
+      )
+      .subscribe(x => {
+        this.booksList = x;
+        this.dataSource = new MatTableDataSource(this.booksList);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.dataSource.filterPredicate = (data: Book, filter: string) => {
+          return data.title.concat(data.author).trim().toLowerCase().includes(filter);
+        };
+    });
   }
 
   ngAfterViewInit(): void {
@@ -68,60 +95,30 @@ export class BooksListComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed()
       .subscribe(x => {
         if (x) {
-          this.reloadBooks();
+          this.loadBooks();
         }
       });
   }
 
-  loadUserBooks(): void {
-    this.booksService.getUserBooks()
-    .pipe(
-      untilDestroyed(this),
-      map(books => books.map(book => {
-        if (book.owner) {
-          book.owner = {
-            id: book.owner.id,
-            name: book.owner.name,
-          };
-        }
-        return book;
-      }))
-    )
-    .subscribe(x => {
-      this.booksList = x;
-      this.dataSource = new MatTableDataSource(this.booksList);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
+  loadUserBooks(): Observable<Book[]> {
+    return this.booksService.getUserBooks();
   }
 
-  loadAllBooks(): void {
-    this.booksService.getAllBooks()
-    .pipe(
-      untilDestroyed(this),
-      map(books => books.map(book => {
-        if (book.owner) {
-          book.owner = {
-            id: book.owner.id,
-            name: book.owner.name,
-          };
-        }
-        return book;
-      }))
-    )
-    .subscribe(x => {
-      this.booksList = x.filter(book => book.status === BookStatus.Public);
-      this.dataSource = new MatTableDataSource(this.booksList);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
+  loadAllBooks(): Observable<Book[]> {
+    return this.booksService.getAllBooks()
+      .pipe(map(books => books.filter(book => book.status === BookStatus.Public)));
   }
 
-  reloadBooks(): void {
+  loadBooks(): Observable<Book[]> {
     if (this.isUserBooksList) {
-      this.loadUserBooks();
+      return this.loadUserBooks();
     } else {
-      this.loadAllBooks();
+      return this.loadAllBooks();
     }
+  }
+
+  // TODO add ISBN number to book model and replace below with that field
+  getCoverUrl(book: Book): string {
+    return book.author ? this.COVERS_API_PREFIX + book.author + this.COVERS_API_SUFFIX : 'assets/no_img.png';
   }
 }

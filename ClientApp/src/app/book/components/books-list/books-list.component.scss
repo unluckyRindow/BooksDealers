@@ -8,7 +8,7 @@ table {
 }
 
 td, th {
-    width: 22%;
+    width: 18%;
 }
 
 th {
@@ -18,4 +18,9 @@ th {
 tr:hover {
     background-color: #eeeeee;
     cursor: pointer;
+}
+
+img { 
+    width: 30px; 
+    height: 30px; 
 }

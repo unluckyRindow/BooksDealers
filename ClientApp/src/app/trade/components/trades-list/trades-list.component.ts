@@ -36,6 +36,9 @@ export class TradesListComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.sortingDataAccessor = _.get;
     this.dataSource.sort = this.sort;
+    this.dataSource.filterPredicate = (data: Trade, filter: string) => {
+      return data.target.title.concat(data.target.author).trim().toLowerCase().includes(filter);
+    };
   }
 
   ngOnDestroy(): void {}
