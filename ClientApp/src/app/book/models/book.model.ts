@@ -8,6 +8,7 @@ export interface Book {
     releaseDate: string | Date;
     creationDate: string | Date;
     description?: string;
+    isbn?: string;
 }
 
 // TODO add all books categories

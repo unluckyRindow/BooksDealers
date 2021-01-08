@@ -27,7 +27,7 @@ export class BookEditComponent implements OnInit {
   bookGroup = this.fb.group({
     title: [this.data.editMode ? this.data.book.title : '', Validators.required],
     author: [this.data.editMode ? this.data.book.author : '', Validators.required],
-    releaseDate: [this.data.editMode ? this.data.book.releaseDate : ''],
+    releaseDate: [this.data.editMode ? (this.data.book.releaseDate as Date).getFullYear() : '', Validators.pattern('^(([1-9])|([1-9][0-9])|([1-9][0-9]{2})|(1[0-9]{3})|(20[0-2][0-9]))$')],
     category: [this.data.editMode ? this.data.book.category : '', Validators.required],
     description: [this.data.editMode ? this.data.book.description : ''],
     visibility: [this.data.editMode ? this.data.book.status : '', Validators.required],

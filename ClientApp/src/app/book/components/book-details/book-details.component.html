@@ -5,7 +5,7 @@
         by {{ data.book.author }}
     </div>
     <div class="additional-info">
-        {{ data.book.releaseDate }}
+        {{ data.book.releaseDate | date:'y'}}
     </div>
     <div id="description" class="additional-info">
         {{ data.book.description }}
@@ -14,7 +14,7 @@
         Owned by: {{ data.book.owner.name }}
     </div>
     <div class="owner-info">
-        Published: {{ data.book.creationDate }}
+        Published: {{ data.book.creationDate | date:'dd-mm-y'}}
     </div>
     
 </div>

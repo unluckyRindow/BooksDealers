@@ -20,6 +20,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./books-list.component.scss']
 })
 export class BooksListComponent implements OnInit, AfterViewInit {
+  readonly COVERS_API_PREFIX = 'http://covers.openlibrary.org/b/isbn/';
+  readonly COVERS_API_SUFFIX = '-S.jpg';
+
   @Input()
   booksList: Book[];
   @Input()
@@ -27,7 +30,7 @@ export class BooksListComponent implements OnInit, AfterViewInit {
 
   dataSource: MatTableDataSource<Book>;
 
-  columnsConfig: string[] = ['title', 'author', 'category', 'releaseDate', 'creationDate'];
+  columnsConfig: string[] = ['cover', 'title', 'author', 'category', 'releaseDate', 'creationDate'];
 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -45,6 +48,8 @@ export class BooksListComponent implements OnInit, AfterViewInit {
       .pipe(
         untilDestroyed(this),
         map(books => books.map(book => {
+          book.releaseDate = new Date(book.releaseDate);
+          book.creationDate = new Date(book.creationDate);
           if (book.owner) {
             book.owner = {
               id: book.owner.id,
@@ -52,7 +57,7 @@ export class BooksListComponent implements OnInit, AfterViewInit {
             };
           }
           return book;
-        }))
+        })),
       )
       .subscribe(x => {
         this.booksList = x;
@@ -110,5 +115,10 @@ export class BooksListComponent implements OnInit, AfterViewInit {
     } else {
       return this.loadAllBooks();
     }
+  }
+
+  // TODO add ISBN number to book model and replace below with that field
+  getCoverUrl(book: Book): string {
+    return book.author ? this.COVERS_API_PREFIX + book.author + this.COVERS_API_SUFFIX : 'assets/no_img.png';
   }
 }
