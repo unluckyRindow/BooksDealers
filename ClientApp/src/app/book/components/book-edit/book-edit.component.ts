@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Book, LiteraryGenre, BookCreateData } from '../../models/book.model';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Book, LiteraryGenre, BookCreateData, BookUpdateData } from '../../models/book.model';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { BookDetailsComponent } from '../book-details/book-details.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -36,6 +36,7 @@ export class BookEditComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<BookDetailsComponent>,
+    public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: BookEditData,
     public fb: FormBuilder,
     private booksService: BooksService,
@@ -53,21 +54,22 @@ export class BookEditComponent implements OnInit {
   }
 
   onSave(): void {
-    const updated: Book = {
+    const updated: BookUpdateData = {
       id: this.data.book.id,
-      owner: this.data.book.owner,
+      ownerId: this.data.book.owner.id,
       status: this.bookGroup.value.visibility,
       title: this.bookGroup.value.title,
       category: this.bookGroup.value.category,
       author: this.bookGroup.value.author,
-      creationDate: this.data.book.creationDate,
+      creationDate: this.data.book.creationDate.toLocaleString(),
       releaseDate: this.bookGroup.value.releaseDate,
       description: this.bookGroup.value.description,
-    } as Book;
+    };
     this.booksService.updateBook(updated)
       .pipe(untilDestroyed(this))
       .subscribe(x => {
         this.dialogRef.close(true);
+        this.dialog.closeAll();
       });
   }
 

@@ -82,9 +82,44 @@ namespace BooksDealersAPI.Repository
         }
 
 
+
+        public IEnumerable<Trade> GetUserTrades(int id)
+        {
+            return _context.Trades
+                .Where(x => x.InitiatiorId == id || x.TargetOwnerId == id)
+                .ToList();
+        }
+
+        public void UpdateTrade(Trade trade)
+        {
+            _context.Update(trade);
+        }
+
+        public Trade GetTrade(int id)
+        {
+            return _context.Trades
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
+        }
+
+        public void DeleteTrade(int id)
+        {
+            Trade trade = new Trade() { Id = id };
+            _context.Trades.Attach(trade);
+            _context.Trades.Remove(trade);
+        }
+
+        public void AddTrade(Trade trade)
+        {
+            _context.Trades.Add(trade);
+        }
+
+
+
         public bool Save()
         {
             return (_context.SaveChanges() >= 0);
         }
+
     }
 }

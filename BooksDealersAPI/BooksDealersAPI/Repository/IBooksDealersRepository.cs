@@ -17,5 +17,10 @@ namespace BooksDealersAPI.Repository
         void AddUser(User user);
         User GetUserByLogin(string login);
         User GetUserById(int id);
+        IEnumerable<Trade> GetUserTrades(int id);
+        void UpdateTrade(Trade trade);
+        Trade GetTrade(int id);
+        void DeleteTrade(int id);
+        void AddTrade(Trade trade);
     }
 }

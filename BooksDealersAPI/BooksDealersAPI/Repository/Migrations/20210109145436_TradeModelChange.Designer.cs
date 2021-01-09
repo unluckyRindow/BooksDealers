@@ -3,15 +3,17 @@ using System;
 using BooksDealersAPI.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BooksDealersAPI.Migrations
 {
     [DbContext(typeof(BooksDealersContext))]
-    partial class BooksDealersContextModelSnapshot : ModelSnapshot
+    [Migration("20210109145436_TradeModelChange")]
+    partial class TradeModelChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,34 +59,6 @@ namespace BooksDealersAPI.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("BooksDealersAPI.Models.Comment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int?>("CommentAuthorId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("text");
-
-                    b.Property<int?>("TradeId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommentAuthorId");
-
-                    b.HasIndex("TradeId");
-
-                    b.ToTable("Comment");
-                });
-
             modelBuilder.Entity("BooksDealersAPI.Models.Trade", b =>
                 {
                     b.Property<int>("Id")
@@ -92,28 +66,20 @@ namespace BooksDealersAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("InitiatiorId")
+                    b.Property<int?>("InitiatiorId")
                         .HasColumnType("integer");
-
-                    b.Property<int>("InitiatorOfferId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("LastUpdated")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Status")
                         .HasColumnType("text");
 
-                    b.Property<int>("TargetId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TargetOwnerId")
+                    b.Property<int?>("TargetId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("InitiatiorId");
+
+                    b.HasIndex("TargetId");
 
                     b.ToTable("Trades");
                 });
@@ -149,15 +115,15 @@ namespace BooksDealersAPI.Migrations
                         .HasForeignKey("OwnerId");
                 });
 
-            modelBuilder.Entity("BooksDealersAPI.Models.Comment", b =>
+            modelBuilder.Entity("BooksDealersAPI.Models.Trade", b =>
                 {
-                    b.HasOne("BooksDealersAPI.Models.User", "CommentAuthor")
-                        .WithMany()
-                        .HasForeignKey("CommentAuthorId");
+                    b.HasOne("BooksDealersAPI.Models.User", "Initiatior")
+                        .WithMany("UserTrades")
+                        .HasForeignKey("InitiatiorId");
 
-                    b.HasOne("BooksDealersAPI.Models.Trade", "Trade")
-                        .WithMany("Comments")
-                        .HasForeignKey("TradeId");
+                    b.HasOne("BooksDealersAPI.Models.Book", "Target")
+                        .WithMany()
+                        .HasForeignKey("TargetId");
                 });
 #pragma warning restore 612, 618
         }

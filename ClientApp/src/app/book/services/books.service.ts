@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { Book, BookCreateData, BookStatus } from '../models/book.model';
+import { Book, BookCreateData, BookStatus, BookUpdateData } from '../models/book.model';
 import { Observable, pipe } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
@@ -59,7 +59,7 @@ export class BooksService {
     return this.http.delete(this.authService.API_URL + 'api/books/' + id, this.authService.GetHeaders());
   }
 
-  updateBook(book: Book): Observable<any> {
+  updateBook(book: BookUpdateData): Observable<any> {
     return this.http.put(this.authService.API_URL + 'api/books/' + book.id, JSON.stringify(book), this.authService.GetHeaders());
   }
 }

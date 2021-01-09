@@ -48,7 +48,7 @@ namespace BooksDealersAPI.Services
         {
             User createdUser = new User()
             {
-                Id = IdHelper.GetNewId(),
+                Id = IdHelper.GetNewUserId(),
                 Name = user.Name,
                 Email = user.Email,
                 Login = user.Login,
