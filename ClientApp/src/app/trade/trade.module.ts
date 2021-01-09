@@ -5,6 +5,7 @@ import { TradeDetailsComponent } from './components/trade-details/trade-details.
 import { MaterialModule } from '../material/material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BookModule } from '../book/book.module';
 
 
 
@@ -16,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
+    BookModule,
   ],
   exports: [
     TradesListComponent

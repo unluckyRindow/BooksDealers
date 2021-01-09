@@ -13,6 +13,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSortModule } from '@angular/material/sort';
+import { MatCardModule } from '@angular/material/card';
+
 
 
 
@@ -29,7 +31,8 @@ const MaterialComponents = [
   MatPaginatorModule,
   MatDialogModule,
   MatRadioModule,
-  MatSortModule
+  MatSortModule,
+  MatCardModule,
 ];
 
 @NgModule({

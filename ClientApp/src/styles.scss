@@ -5,24 +5,30 @@
 }
 
 .mat-custom-icon {
-    color: #373a40;
+    color: #30475e;
 }
 
 .mat-custom-button {
-    background-color: #373a40;
+    background-color: #30475e;
     color: #eeeeee;
     font-size: 20px;;
 }
 
 .mat-custom-stroked-button {
-    color: #373a40;
+    color: #30475e;
     font-size: 20px;;
+}
+
+.mat-custom-raised-button {
+    background-color: #30475e;
+    color: #eeeeee;
+    font-size: 20px;
 }
 
 .custom-title {
     font-size: 40px;
     padding: 10px;
-    color: #373a40
+    color: #30475e
 }
 
 .custom-label {
@@ -53,12 +59,12 @@
 }
 
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
-    border-color:#373a40; 
+    border-color:#30475e; 
 }
   
 .mat-radio-button.mat-accent .mat-radio-inner-circle{
-    color:#373a40;
-    background-color:#373a40 ;
+    color:#30475e;
+    background-color:#30475e ;
 }
 
 .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
@@ -72,6 +78,6 @@ dummy color pallete
 
 light: #eeeeee
 medium: #686d76
-dark: #373a40
+dark: #30475e
 colorful: #19d3da
 */

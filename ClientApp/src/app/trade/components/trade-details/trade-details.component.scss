@@ -1,0 +1,19 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.trade-image {
+    font-size: 50px;
+}
+
+.button-panel {
+    display: flex;
+    align-items: center;
+}
+
+.button-panel button {
+    margin: 25px;
+}

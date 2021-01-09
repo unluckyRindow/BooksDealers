@@ -1,0 +1,33 @@
+.book-card {
+    max-width: 800px;
+    min-width: 600px;
+    margin: 25px;
+}
+
+.book-cover {
+    background-image: url('/assets/no_img.png');
+    background-size: cover;
+}
+
+.mat-card-avatar {
+    width: 75px;
+    height: 75px;
+}
+
+.additional-info {
+    padding-bottom: 20px;
+}
+
+#description {
+    max-width: 800px;
+    min-width: 500px;
+    padding-top: 20px;
+}
+
+.no-data {
+    font-size: 150px;
+}
+
+.f-right {
+    float: right;
+}

@@ -45,20 +45,7 @@ export class BooksListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.loadBooks()
-      .pipe(
-        untilDestroyed(this),
-        map(books => books.map(book => {
-          book.releaseDate = new Date(book.releaseDate);
-          book.creationDate = new Date(book.creationDate);
-          if (book.owner) {
-            book.owner = {
-              id: book.owner.id,
-              name: book.owner.name,
-            };
-          }
-          return book;
-        })),
-      )
+      .pipe(untilDestroyed(this))
       .subscribe(x => {
         this.booksList = x;
         this.dataSource = new MatTableDataSource(this.booksList);
@@ -100,20 +87,11 @@ export class BooksListComponent implements OnInit, AfterViewInit {
       });
   }
 
-  loadUserBooks(): Observable<Book[]> {
-    return this.booksService.getUserBooks();
-  }
-
-  loadAllBooks(): Observable<Book[]> {
-    return this.booksService.getAllBooks()
-      .pipe(map(books => books.filter(book => book.status === BookStatus.Public)));
-  }
-
   loadBooks(): Observable<Book[]> {
     if (this.isUserBooksList) {
-      return this.loadUserBooks();
+      return this.booksService.getUserBooks();
     } else {
-      return this.loadAllBooks();
+      return this.booksService.getAllBooks();
     }
   }
 

@@ -8,7 +8,7 @@ table {
 }
 
 td, th {
-    width: 18%;
+    width: 20%;
 }
 
 th {
@@ -23,4 +23,9 @@ tr:hover {
 img { 
     width: 30px; 
     height: 30px; 
+}
+
+.mat-column-cover {
+    flex: 0 0 10% !important;
+    width: 10% !important;
 }

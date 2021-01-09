@@ -8,12 +8,13 @@ import { BookDetailsComponent } from './components/book-details/book-details.com
 import { MockedService } from '../mocked/mocked.service';
 import { BookEditComponent } from './components/book-edit/book-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BookCardComponent } from './components/book-card/book-card.component';
 
 
 
 
 @NgModule({
-  declarations: [BooksListComponent, UserBooksListComponent, BookDetailsComponent, BookEditComponent],
+  declarations: [BooksListComponent, UserBooksListComponent, BookDetailsComponent, BookEditComponent, BookCardComponent],
   imports: [
     CommonModule,
     MaterialModule,
@@ -23,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   exports: [
     BooksListComponent,
-    UserBooksListComponent
+    UserBooksListComponent,
+    BookCardComponent,
   ],
   providers: [
     MockedService

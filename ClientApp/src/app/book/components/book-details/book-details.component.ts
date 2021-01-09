@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
 import { BookEditComponent, BookEditData } from '../book-edit/book-edit.component';
 import { BooksService } from '../../services/books.service';
 import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
+import { Router } from '@angular/router';
 
 export interface BookDetailsData{
   book: Book;
@@ -26,6 +27,7 @@ export class BookDetailsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: BookDetailsData,
     public dialog: MatDialog,
     private booksService: BooksService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -56,7 +58,8 @@ export class BookDetailsComponent implements OnInit {
 
   // init trade here or close and ask list for same
   onTrade(): void {
-
+    this.router.navigate(['/trades/new'], {state: {data: {targetBook: this.book, creationMode: true}}});
+    this.dialog.closeAll();
   }
 
 }
