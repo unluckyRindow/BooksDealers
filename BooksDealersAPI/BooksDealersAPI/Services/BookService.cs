@@ -23,7 +23,7 @@ namespace BooksDealersAPI.Services
             User owner = _booksDealersRepository.GetUserById(bookAddModel.OwnerId);
             Book book = new Book()
             {
-                Id = IdHelper.GetNewId(),
+                Id = IdHelper.GetNewBookId(),
                 Owner = owner,
                 Status = bookAddModel.Status,
                 Title = bookAddModel.Title,
@@ -55,6 +55,8 @@ namespace BooksDealersAPI.Services
         public bool UpdateBook(BookViewModel bookViewModel)
         {
             User owner = _booksDealersRepository.GetUserById(bookViewModel.OwnerId);
+            DateTime releaseDate = Convert.ToDateTime($"{bookViewModel.ReleaseDate}-01-01");
+            DateTime creationDate = Convert.ToDateTime(bookViewModel.CreationDate);
             Book book = new Book()
             {
                 Id = bookViewModel.Id,
@@ -63,8 +65,8 @@ namespace BooksDealersAPI.Services
                 Title = bookViewModel.Title,
                 Author = bookViewModel.Author,
                 Category = bookViewModel.Category,
-                ReleaseDate = bookViewModel.ReleaseDate,
-                CreationDate = bookViewModel.CreationDate,
+                ReleaseDate = releaseDate,
+                CreationDate = creationDate,
                 Description = bookViewModel.Description
             };
             _booksDealersRepository.UpdateBook(book);

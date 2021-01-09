@@ -32,6 +32,11 @@ export interface BookCreateData {
     description?: string;
 }
 
+export interface BookUpdateData extends BookCreateData {
+    id: number;
+    creationDate: string | Date;
+}
+
 export interface UserData {
     id: number;
     name: string;

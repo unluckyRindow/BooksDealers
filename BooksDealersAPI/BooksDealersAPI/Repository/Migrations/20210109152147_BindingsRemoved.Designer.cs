@@ -3,15 +3,17 @@ using System;
 using BooksDealersAPI.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BooksDealersAPI.Migrations
 {
     [DbContext(typeof(BooksDealersContext))]
-    partial class BooksDealersContextModelSnapshot : ModelSnapshot
+    [Migration("20210109152147_BindingsRemoved")]
+    partial class BindingsRemoved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,17 +94,11 @@ namespace BooksDealersAPI.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<int>("InitiatiorId")
                         .HasColumnType("integer");
 
                     b.Property<int>("InitiatorOfferId")
                         .HasColumnType("integer");
-
-                    b.Property<DateTime>("LastUpdated")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Status")
                         .HasColumnType("text");
@@ -112,6 +108,12 @@ namespace BooksDealersAPI.Migrations
 
                     b.Property<int>("TargetOwnerId")
                         .HasColumnType("integer");
+
+                    b.Property<DateTime>("TastUpdated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("TreationDate")
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 

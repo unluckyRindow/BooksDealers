@@ -21,6 +21,10 @@ export class TradesService {
     return this.http.get(this.API_URL + 'api/trades/user-trades/' + this.authService.userId, this.authService.GetHeaders());
   }
 
+  getTrade(id: number): Observable<any> {
+    return this.http.get(this.API_URL + 'api/trades/' + id, this.authService.GetHeaders());
+  }
+
   updateTrade(trade: Trade): Observable<any> {
     return this.http.put(this.API_URL + 'api/trades/' + trade.id, this.authService.GetHeaders());
   }

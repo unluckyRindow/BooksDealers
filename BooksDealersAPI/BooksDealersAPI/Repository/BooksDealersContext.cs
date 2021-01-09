@@ -18,10 +18,6 @@ namespace BooksDealersAPI.Repository
             modelBuilder.Entity<Book>()
                 .HasOne(o => o.Owner)
                 .WithMany(b => b.UserBooks);
-
-            modelBuilder.Entity<Trade>()
-                .HasOne(u => u.Initiatior)
-                .WithMany(t => t.UserTrades);
         }
     }
 }
