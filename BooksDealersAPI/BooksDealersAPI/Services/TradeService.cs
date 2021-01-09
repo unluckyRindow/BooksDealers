@@ -20,7 +20,6 @@ namespace BooksDealersAPI.Services
         {
             Trade trade = new Trade()
             {
-                Id = IdHelper.GetNewTradeId(),
                 Status = tradeAddModel.Status,
                 InitiatiorId = tradeAddModel.Initiator,
                 InitiatorOfferId = tradeAddModel.InitiatorOffer,

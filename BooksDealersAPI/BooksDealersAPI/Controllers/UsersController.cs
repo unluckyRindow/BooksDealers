@@ -8,6 +8,7 @@ using BooksDealersAPI.FrontendModels;
 using BooksDealersAPI.Models;
 using BooksDealersAPI.Services;
 using BooksDealersAPI.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -55,6 +56,18 @@ namespace BooksDealersAPI.Controllers
                 return BadRequest();
             }
 
+            return userWithToken;
+        }
+
+        [Authorize]
+        [HttpPost("refresh-token")]
+        public ActionResult<UserWithToken> RefreshToken ([FromBody] string token)
+        {
+            UserWithToken userWithToken = _userService.RefreshToken(token);
+            if (userWithToken == null)
+            {
+                return NotFound();
+            }
             return userWithToken;
         }
 

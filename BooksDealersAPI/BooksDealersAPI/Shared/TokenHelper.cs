@@ -32,5 +32,11 @@ namespace BooksDealersAPI.Shared
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+
+        public string GetTokenData(string stringToken)
+        {
+            // TODO implement me
+            return null;
+        }
     }
 }

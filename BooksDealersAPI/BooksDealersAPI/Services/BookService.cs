@@ -23,7 +23,6 @@ namespace BooksDealersAPI.Services
             User owner = _booksDealersRepository.GetUserById(bookAddModel.OwnerId);
             Book book = new Book()
             {
-                Id = IdHelper.GetNewBookId(),
                 Owner = owner,
                 Status = bookAddModel.Status,
                 Title = bookAddModel.Title,

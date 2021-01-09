@@ -7,6 +7,6 @@ namespace BooksDealersAPI.Services
     {
         UserWithToken Register(UserRegisterData user);
         UserWithToken Login(UserLoginData user);
-
+        UserWithToken RefreshToken(string token);
     }
 }
