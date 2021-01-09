@@ -1,0 +1,56 @@
+<mat-card class="book-card">
+    <div *ngIf="!!book; else noData">
+        <mat-card-header>
+            <div mat-card-avatar class="book-cover"></div>
+            <mat-card-title>{{ book.title }}</mat-card-title>
+            <mat-card-subtitle>
+                by {{ book.author }} 
+                <br/> 
+                {{ book.releaseDate | date:'y' }}
+            </mat-card-subtitle>
+        </mat-card-header>
+
+        <div *ngIf="allowToChooseBook" class="form-field f-right">
+            <mat-form-field>
+                <mat-label>Change Book</mat-label>
+                <mat-select (selectionChange)="onBookChange($event.value)">
+                    <mat-option *ngFor="let book of bookOptionLabels" [value]="book.value">
+                        {{book.label}}
+                      </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    
+        <mat-card-content>
+            <div id="description" class="additional-info">
+                {{ book.description }}
+            </div>
+            <div class="owner-info">
+                Owned by: {{ book.owner.name }}
+            </div>
+            <div class="owner-info">
+                Published: {{ book.creationDate | date:'dd-mm-y'}}
+            </div>
+        </mat-card-content>
+    
+        <mat-card-actions>
+    
+        </mat-card-actions>
+    </div>
+
+    <ng-template #noData>
+        <mat-icon class="no-data" [inline]="true" color="custom-icon">no_sim</mat-icon>
+
+        <div class="form-field f-right">
+            <mat-form-field>
+                <mat-label>Change Book</mat-label>
+                <mat-select (selectionChange)="onBookChange($event.value)">
+                    <mat-option *ngFor="let book of bookOptionLabels" [value]="book.value">
+                        {{book.label}}
+                      </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </ng-template>
+
+</mat-card>

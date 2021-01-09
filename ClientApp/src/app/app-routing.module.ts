@@ -7,6 +7,7 @@ import { UserBooksListComponent } from './book/components/user-books-list/user-b
 import { TradesListComponent } from './trade/components/trades-list/trades-list.component';
 import { HomeComponent } from './home/components/home/home.component';
 import { ProfileComponent } from './profile/components/profile/profile.component';
+import { TradeDetailsComponent } from './trade/components/trade-details/trade-details.component';
 
 // TODO routing for perticular book (popup insted?) and existing trade
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'books', component: BooksListComponent, canActivate: [AuthGuard]},
   {path: 'my-books', component: UserBooksListComponent, canActivate: [AuthGuard]},
   {path: 'trades', component: TradesListComponent, canActivate: [AuthGuard]},
+  {path: 'trades/:tradeId', component: TradeDetailsComponent, canActivate: [AuthGuard]},
   {path: '**', redirectTo: '/home'}
 ];
 

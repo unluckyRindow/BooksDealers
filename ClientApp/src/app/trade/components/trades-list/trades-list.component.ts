@@ -7,6 +7,7 @@ import { TradesService } from '../../services/trades.service';
 import { MockedService } from 'src/app/mocked/mocked.service';
 import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
 import * as _ from 'lodash';
+import { Router } from '@angular/router';
 
 @UntilDestroy()
 @Component({
@@ -27,6 +28,7 @@ export class TradesListComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private tradesService: TradesService,
     private mockedService: MockedService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -44,7 +46,7 @@ export class TradesListComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy(): void {}
 
   onTradeSelected(trade: Trade): void {
-    // TODO route navigate to trade details here
+    this.router.navigate([`/trades`, trade.id], {state: {data: {trade}}});
   }
 
   applyFilter(event: Event): void {

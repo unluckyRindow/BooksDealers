@@ -41,7 +41,7 @@
                 </span>
                 {{ 'LOGIN.OR' | translate}}
                 <span class="button-wrapper">
-                    <button mat-stroked-button (click)="onSignUp()">{{ 'LOGIN.SIGN_UP' | translate}}</button>
+                    <button mat-stroked-button color="custom-stroked-button" (click)="onSignUp()">{{ 'LOGIN.SIGN_UP' | translate}}</button>
                 </span>
             </div>
         </div>
@@ -102,7 +102,7 @@
                     <button mat-raised-button color="custom-raised-button" (click)="onSignUp()" [disabled]="this.registrationMode && this.signUpGroup.invalid">{{ 'LOGIN.SIGN_UP' | translate}}</button>
                 </span>
                 <span class="button-wrapper">
-                    <button mat-stroked-button (click)="onCancel()">{{ 'LOGIN.CANCEL' | translate}}</button>
+                    <button mat-stroked-button color="custom-stroked-button" (click)="onCancel()">{{ 'LOGIN.CANCEL' | translate}}</button>
                 </span>
             </div>
         </ng-template>
