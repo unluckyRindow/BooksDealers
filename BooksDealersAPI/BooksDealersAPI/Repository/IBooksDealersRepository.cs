@@ -22,5 +22,6 @@ namespace BooksDealersAPI.Repository
         Trade GetTrade(int id);
         void DeleteTrade(int id);
         void AddTrade(Trade trade);
+        void AddComment(Comment comment);
     }
 }

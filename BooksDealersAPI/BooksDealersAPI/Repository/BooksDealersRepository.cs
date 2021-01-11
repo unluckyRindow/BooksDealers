@@ -86,6 +86,7 @@ namespace BooksDealersAPI.Repository
         public IEnumerable<Trade> GetUserTrades(int id)
         {
             return _context.Trades
+                .Include(x => x.Comments)
                 .Where(x => x.InitiatiorId == id || x.TargetOwnerId == id)
                 .ToList();
         }
@@ -98,6 +99,7 @@ namespace BooksDealersAPI.Repository
         public Trade GetTrade(int id)
         {
             return _context.Trades
+                .Include(x => x.Comments)
                 .Where(x => x.Id == id)
                 .FirstOrDefault();
         }
@@ -114,6 +116,10 @@ namespace BooksDealersAPI.Repository
             _context.Trades.Add(trade);
         }
 
+        public void AddComment(Comment comment)
+        {
+            _context.Comments.Add(comment);
+        }
 
 
         public bool Save()
