@@ -12,5 +12,6 @@ namespace BooksDealersAPI.Services
         bool UpdateTrade(TradeViewModel trade);
         bool AddTrade(TradeAddModel trade);
         bool DeleteTrade(int id);
+        bool AddComment(CommentViewModel commentViewModel);
     }
 }

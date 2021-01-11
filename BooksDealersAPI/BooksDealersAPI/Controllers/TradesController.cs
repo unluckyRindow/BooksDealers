@@ -77,6 +77,17 @@ namespace BooksDealersAPI.Controllers
             }
             return NotFound();
         }
+
+        [HttpPost("comments")]
+        public IActionResult AddComment([FromBody] CommentViewModel comment)
+        {
+            bool created = _tradeService.AddComment(comment);
+            if (created)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
         
     }
 }

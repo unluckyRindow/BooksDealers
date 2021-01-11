@@ -71,6 +71,14 @@ namespace BooksDealersAPI.Services
             return _booksDealersRepository.Save();
         }
 
+        public bool AddComment(CommentViewModel commentViewModel)
+        {
+            Comment comment = mapViewCommentToDbCommentModel(commentViewModel, true);
+            _booksDealersRepository.AddComment(comment);
+            return _booksDealersRepository.Save();
+        }
+
+
         public TradeViewModel mapDbTradeModelToViewTrade(Trade trade)
         {
             User initiator = _booksDealersRepository.GetUserById(trade.InitiatiorId);
@@ -87,6 +95,13 @@ namespace BooksDealersAPI.Services
             };
             BookViewModel offer = _booksService.mapDbBookModelToViewBook(_booksDealersRepository.GetBook(trade.InitiatorOfferId));
             BookViewModel target = _booksService.mapDbBookModelToViewBook(_booksDealersRepository.GetBook(trade.TargetId));
+            List<Comment> comments = (List<Comment>)trade.Comments;
+            List<CommentViewModel> commentsViewModel = new List<CommentViewModel>();
+
+            comments.ForEach(x =>
+            {
+                commentsViewModel.Add(mapDbCommentModelToViewModel(x));
+            });
 
             TradeViewModel tradeViewModel = new TradeViewModel()
             {
@@ -98,7 +113,7 @@ namespace BooksDealersAPI.Services
                 TargetOwner = targetOwnerUserData,
                 InitiatorOffer = offer,
                 Target = target,
-                Comments = new List<CommentViewModel>(),
+                Comments = commentsViewModel,
             };
             return tradeViewModel;
         }
@@ -106,6 +121,13 @@ namespace BooksDealersAPI.Services
         public Trade mapViewTradeToDbTradeModel(TradeViewModel tradeViewModel)
         {
             DateTime creationDate = Convert.ToDateTime(tradeViewModel.CreationDate);
+            List<Comment> comments = new List<Comment>();
+            List<CommentViewModel> commentsViewModel = (List<CommentViewModel>)tradeViewModel.Comments;
+
+            commentsViewModel.ForEach(x =>
+            {
+                comments.Add(mapViewCommentToDbCommentModel(x, false));
+            });
             Trade trade = new Trade()
             {
                 Id = tradeViewModel.Id,
@@ -116,9 +138,48 @@ namespace BooksDealersAPI.Services
                 TargetId = tradeViewModel.Target.Id,
                 LastUpdated = DateTime.Now,
                 CreationDate = creationDate,
-                Comments = new List<Comment>(),
+                Comments = comments,
             };
             return trade;
+        }
+
+        public Comment mapViewCommentToDbCommentModel(CommentViewModel commentViewModel, bool creationMode)
+        {
+            User author = _booksDealersRepository.GetUserById(commentViewModel.CommentAuthor.Id);
+            DateTime creationDate = Convert.ToDateTime(commentViewModel.CreationDate);
+            Trade trade = _booksDealersRepository.GetTrade(commentViewModel.TradeId);
+            Comment comment = new Comment()
+            {
+                CommentAuthor = author,
+                Text = commentViewModel.Text,
+                CreationDate = DateTime.Now,
+                Trade = trade,
+            };
+            if (!creationMode)
+            {
+                comment.Id = commentViewModel.Id;
+                comment.CreationDate = creationDate;
+
+            }
+            return comment;
+        }
+
+        public CommentViewModel mapDbCommentModelToViewModel(Comment comment)
+        {
+            UserData authorData = new UserData()
+            {
+                Id = comment.CommentAuthor.Id,
+                Name = comment.CommentAuthor.Name,
+            };
+            CommentViewModel commentViewModel = new CommentViewModel()
+            {
+                Id = comment.Id,
+                CommentAuthor = authorData,
+                Text = comment.Text,
+                CreationDate = comment.CreationDate.ToString(),
+                TradeId = comment.Trade.Id
+            };
+            return commentViewModel;
         }
     }
 }
