@@ -7,6 +7,7 @@ import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { pipe } from 'rxjs';
 import { TradesService } from '../../services/trades.service';
+import { Comment } from '../../models/comment.model';
 
 // tslint:disable:variable-name
 
@@ -62,14 +63,29 @@ export class TradeDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.trade = history.state.data.trade as Trade;
-    this.creationMode = !!history.state.data.creationMode;
-    this.targetBook = this.creationMode ? history.state.data.targetBook : this.trade.target;
-    this.offer = this.creationMode ? null : this.trade.initiatorOffer;
-    this.isUserInitiator = this.creationMode || this.trade.initiator.id === this.authService.userId;
-    this.booksSourceId = this.isUserInitiator ? this.authService.userId : this.trade.initiator.id;
+    const tradeId = +this.router.url.split('/').pop();
+    if (tradeId) {
+      this.tradesService.getTrade(tradeId)
+        .pipe(untilDestroyed(this))
+        .subscribe(x => {
+          this.trade = x;
+          this.creationMode = false;
+          this.targetBook = this.trade.target;
+          this.offer = this.creationMode ? null : this.trade.initiatorOffer;
+          this.isUserInitiator = this.creationMode || this.trade.initiator.id === this.authService.userId;
+          this.booksSourceId = this.isUserInitiator ? this.authService.userId : this.trade.initiator.id;
+          this.resolveVisiblityFlags(this.trade, this.creationMode);
 
-    this.resolveVisiblityFlags(this.trade, this.creationMode);
+        });
+    } else {
+      this.trade = history.state.data.trade as Trade;
+      this.creationMode = !!history.state.data.creationMode;
+      this.targetBook = this.creationMode ? history.state.data.targetBook : this.trade.target;
+      this.offer = this.creationMode ? null : this.trade.initiatorOffer;
+      this.isUserInitiator = this.creationMode || this.trade.initiator.id === this.authService.userId;
+      this.booksSourceId = this.isUserInitiator ? this.authService.userId : this.trade.initiator.id;
+      this.resolveVisiblityFlags(this.trade, this.creationMode);
+    }
   }
 
 
@@ -126,6 +142,21 @@ export class TradeDetailsComponent implements OnInit {
       this.sendDisabled = true;
       this.canAccept = !this.isUserInitiator;
     }
+  }
+
+  onCommentSend(text: string): void {
+    const newComment: Comment = {
+      id: -1,
+      commentAuthor: {id: this.authService.userId, name: this.userName},
+      text,
+      creationDate: '01-01-2020',
+      tradeId: this.trade.id,
+    };
+    this.tradesService.addComment(newComment)
+      .pipe(untilDestroyed(this))
+      .subscribe(x => {
+        this.ngOnInit();
+      });
   }
 
   resolveVisiblityFlags(trade: Trade, creationMode: boolean): void {

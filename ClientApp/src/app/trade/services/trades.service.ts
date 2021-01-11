@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { Trade, TradeAddModel } from '../models/trade.model';
 import { map } from 'rxjs/operators';
 import { BooksService } from 'src/app/book/services/books.service';
+import { Comment } from '../models/comment.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,9 @@ export class TradesService {
 
   addTrade(trade: TradeAddModel): Observable<any> {
     return this.http.post(this.API_URL + 'api/trades', JSON.stringify(trade), this.authService.GetHeaders());
+  }
+
+  addComment(comment: Comment): Observable<any> {
+    return this.http.post(this.API_URL + 'api/trades/comments', JSON.stringify(comment), this.authService.GetHeaders());
   }
 }

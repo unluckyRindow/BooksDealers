@@ -29,4 +29,12 @@
         [booksSourceId]="booksSourceId">
     </app-book-card>
 
+    <app-comments-box
+        [sendDisabled]="creationMode"
+        (commentSend)="onCommentSend($event)"
+        [comments]="trade ? trade.comments : []"
+    >
+        
+    </app-comments-box>
+
 </div>

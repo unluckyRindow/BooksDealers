@@ -6,11 +6,12 @@ import { MaterialModule } from '../material/material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookModule } from '../book/book.module';
+import { CommentsBoxComponent } from './components/comments-box/comments-box.component';
 
 
 
 @NgModule({
-  declarations: [TradesListComponent, TradeDetailsComponent],
+  declarations: [TradesListComponent, TradeDetailsComponent, CommentsBoxComponent],
   imports: [
     CommonModule,
     MaterialModule,

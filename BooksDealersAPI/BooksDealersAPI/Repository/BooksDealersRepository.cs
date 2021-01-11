@@ -93,7 +93,17 @@ namespace BooksDealersAPI.Repository
 
         public void UpdateTrade(Trade trade)
         {
-            _context.Update(trade);
+            var local = _context.Set<Trade>()
+                .Local
+                .FirstOrDefault(entry => entry.Id.Equals(trade.Id));
+
+            if (local != null)
+            {
+                _context.Entry(local).State = EntityState.Detached;
+            }
+            _context.Entry(trade).State = EntityState.Modified;
+
+            _context.SaveChanges();
         }
 
         public Trade GetTrade(int id)
