@@ -13,5 +13,5 @@ export interface LoginData {
 export interface UserData {
     id: string;
     name: string;
-    email: string;
+    email?: string;
 }

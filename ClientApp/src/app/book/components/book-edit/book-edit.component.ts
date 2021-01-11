@@ -30,6 +30,7 @@ export class BookEditComponent implements OnInit {
     releaseDate: [this.data.editMode ? (this.data.book.releaseDate as Date).getFullYear() : '', Validators.pattern('^(([1-9])|([1-9][0-9])|([1-9][0-9]{2})|(1[0-9]{3})|(20[0-2][0-9]))$')],
     category: [this.data.editMode ? this.data.book.category : '', Validators.required],
     description: [this.data.editMode ? this.data.book.description : ''],
+    isbn: [this.data.editMode ? this.data.book.isbn : ''],
     visibility: [this.data.editMode ? this.data.book.status : '', Validators.required],
   });
 
@@ -56,7 +57,7 @@ export class BookEditComponent implements OnInit {
   onSave(): void {
     const updated: BookUpdateData = {
       id: this.data.book.id,
-      ownerId: this.data.book.owner.id,
+      owner: {id: this.authService.userId, name: this.authService.userName},
       status: this.bookGroup.value.visibility,
       title: this.bookGroup.value.title,
       category: this.bookGroup.value.category,
@@ -64,6 +65,7 @@ export class BookEditComponent implements OnInit {
       creationDate: this.data.book.creationDate.toLocaleString(),
       releaseDate: this.bookGroup.value.releaseDate,
       description: this.bookGroup.value.description,
+      isbn: this.bookGroup.value.isbn,
     };
     this.booksService.updateBook(updated)
       .pipe(untilDestroyed(this))
@@ -75,13 +77,14 @@ export class BookEditComponent implements OnInit {
 
   onAdd(): void {
     const created: BookCreateData = {
-      ownerId: this.authService.userId,
+      owner: {id: this.authService.userId, name: this.authService.userName},
       status: this.bookGroup.value.visibility,
       title: this.bookGroup.value.title,
       category: this.bookGroup.value.category,
       author: this.bookGroup.value.author,
       releaseDate: this.bookGroup.value.releaseDate,
       description: this.bookGroup.value.description,
+      isbn: this.bookGroup.value.isbn,
     } as BookCreateData;
     this.booksService.addBook(created)
       .pipe(untilDestroyed(this))

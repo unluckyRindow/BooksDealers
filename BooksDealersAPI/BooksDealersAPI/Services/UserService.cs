@@ -43,12 +43,10 @@ namespace BooksDealersAPI.Services
             return userWithToken;
         }
 
-
         public UserWithToken Register(UserRegisterData user)
         {
             User createdUser = new User()
             {
-                Id = IdHelper.GetNewUserId(),
                 Name = user.Name,
                 Email = user.Email,
                 Login = user.Login,
@@ -66,6 +64,29 @@ namespace BooksDealersAPI.Services
             userWithToken.Token = tokenHelper.CreateToken(createdUser.Id, createdUser.Name, _jwtSettings.SecretKey);
 
             return userWithToken;
+        }
+
+
+        public UserWithToken RefreshToken(string token)
+        {
+            // TODO implement me
+            var userData = tokenHelper.GetTokenData(token);
+            return null;
+        }
+
+        public UserCommonData GetUserData(int id)
+        {
+            User user = _booksDealersRepository.GetUserById(id);
+            if (user != null)
+            {
+                return new UserCommonData()
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Email = user.Email,
+                };
+            }
+            return null;
         }
     }
 }

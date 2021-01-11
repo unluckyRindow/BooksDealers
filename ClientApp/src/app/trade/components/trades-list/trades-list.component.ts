@@ -16,11 +16,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./trades-list.component.scss']
 })
 export class TradesListComponent implements OnInit, OnDestroy, AfterViewInit {
+  readonly COVERS_API_PREFIX = 'http://covers.openlibrary.org/b/isbn/';
+  readonly COVERS_API_SUFFIX = '-S.jpg';
 
   tradesList: Trade[];
 
   dataSource: MatTableDataSource<Trade>;
-  columnsConfig: string[] = ['target.title', 'target.author', 'target.category', 'initiator.name', 'lastUpdated', 'creationDate'];
+  columnsConfig: string[] = ['cover', 'target.title', 'target.author', 'target.category', 'initiator.name', 'lastUpdated', 'creationDate'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -36,11 +38,6 @@ export class TradesListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.sortingDataAccessor = _.get;
-    this.dataSource.sort = this.sort;
-    this.dataSource.filterPredicate = (data: Trade, filter: string) => {
-      return data.target.title.concat(data.target.author).trim().toLowerCase().includes(filter);
-    };
   }
 
   ngOnDestroy(): void {}
@@ -59,12 +56,21 @@ export class TradesListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   loadTrades(): void {
-    this.mockedService.getAllTrades()
+    this.tradesService.getUserTrades()
       .pipe(untilDestroyed(this))
       .subscribe(x => {
         this.tradesList = x;
         this.dataSource = new MatTableDataSource(this.tradesList);
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sortingDataAccessor = _.get;
+        this.dataSource.sort = this.sort;
+        this.dataSource.filterPredicate = (data: Trade, filter: string) => {
+          return data.target.title.concat(data.target.author).trim().toLowerCase().includes(filter);
+        };
       });
+  }
+
+  getCoverUrl(trade: Trade): string {
+    return trade.target.isbn ? this.COVERS_API_PREFIX + trade.target.isbn + this.COVERS_API_SUFFIX : 'assets/no_img.png';
   }
 }

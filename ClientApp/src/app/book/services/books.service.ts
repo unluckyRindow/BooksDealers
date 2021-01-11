@@ -16,8 +16,8 @@ export class BooksService {
   ) { }
 
 
-  getUserBooks(): Observable<any> {
-    return this.http.get(this.authService.API_URL + 'api/books/user-books/' + this.authService.userId, this.authService.GetHeaders())
+  getUserBooks(id: number): Observable<any> {
+    return this.http.get(this.authService.API_URL + 'api/books/user-books/' + id, this.authService.GetHeaders())
       .pipe(
         map((books: any) => books.map(book => {
           book.releaseDate = new Date(book.releaseDate);

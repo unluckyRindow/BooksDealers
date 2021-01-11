@@ -26,13 +26,23 @@ namespace BooksDealersAPI.Controllers
         [HttpGet("user-trades/{id}")]
         public IActionResult UserTrades(int id)
         {
-            return Ok(_tradeService.GetUserTrades(id));
+            IEnumerable<TradeViewModel> trades = _tradeService.GetUserTrades(id);
+            if (trades == null)
+            {
+                return NotFound();
+            }
+            return Ok(trades);
         }
 
         [HttpGet("{id}")]
         public IActionResult Trade(int id)
         {
-            return Ok(_tradeService.GetTrade(id));
+            TradeViewModel trade = _tradeService.GetTrade(id);
+            if (trade == null)
+            {
+                return NotFound();
+            }
+            return Ok(trade);
         }
 
         [HttpPut("{id}")]

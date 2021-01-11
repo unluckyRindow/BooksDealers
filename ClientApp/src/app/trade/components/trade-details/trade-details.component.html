@@ -1,17 +1,32 @@
 <div class="wrapper">
+    <div class="header-wrapper default-font">
+        <div class="custom-title">Trade with {{ (creationMode || isUserInitiator) ? targetBook.owner.name : trade.initiator.name }}</div>
+        <div class="additional-info">
+            initiated by {{ creationMode ? userName : trade.initiator.name}}
+            <br/>
+            status: {{ creationMode ? 'NEW' : trade.status }}
+            <div *ngIf="!creationMode" class="align-left">
+                created: {{ trade.creationDate | date:'dd-MM-y hh:mm' }}
+                <br/>
+                last update: {{ trade.lastUpdated | date:'dd-MM-y hh:mm' }}
+            </div>
+        </div>
+    </div>
+
     <app-book-card [book]="targetBook"></app-book-card>
 
     <div class="button-panel">
-        <button mat-stroked-button color="custom-stroked-button" (click)="onReject()">REJECT</button>
+        <button mat-stroked-button [disabled]="tradeClosed" color="custom-stroked-button" (click)="onReject()">REJECT</button>
         <mat-icon class="trade-image" [inline]="true" color="custom-icon">loop</mat-icon>
-        <button *ngIf="canAccept" mat-raised-button color="custom-raised-button" (click)="onAccept()">ACCEPT</button>
-        <button *ngIf="creationMode || offerChanged" [disabled]="!offer" mat-raised-button color="custom-raised-button" (click)="onSendOffer()">SEND OFFER</button>
+        <button *ngIf="canAccept" [disabled]="acceptDisabled" mat-raised-button color="custom-raised-button" (click)="onAccept()">ACCEPT</button>
+        <button *ngIf="canSend" [disabled]="sendDisabled" mat-raised-button color="custom-raised-button" (click)="onSendOffer()">SEND OFFER</button>
     </div>
 
     <app-book-card 
         [book]="trade ? trade.initiatorOffer : undefined"
-        [allowToChooseBook]="true"
-        (bookChanged)="onBookChange($event)">
+        [allowToChooseBook]="canChangeOffer"
+        (bookChanged)="onBookChange($event)"
+        [booksSourceId]="booksSourceId">
     </app-book-card>
 
 </div>

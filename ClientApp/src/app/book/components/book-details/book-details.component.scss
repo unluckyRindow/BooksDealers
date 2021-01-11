@@ -6,6 +6,11 @@
 #description {
     max-width: 800px;
     min-width: 500px;
+    padding-left: 20px;
+}
+
+.owner-info {
+    padding-left: 20px
 }
 
 .custom-title {
@@ -19,4 +24,15 @@
 
 .user-options {
     margin-left: 10px !important;
+}
+
+.header {
+    display: flex;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+    padding: 0 20px 20px 0;
+
 }

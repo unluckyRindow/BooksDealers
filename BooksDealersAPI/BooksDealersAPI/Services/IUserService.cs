@@ -1,5 +1,6 @@
 ﻿using System;
 using BooksDealersAPI.FrontendModels;
+using BooksDealersAPI.Models;
 
 namespace BooksDealersAPI.Services
 {
@@ -7,6 +8,7 @@ namespace BooksDealersAPI.Services
     {
         UserWithToken Register(UserRegisterData user);
         UserWithToken Login(UserLoginData user);
-
+        UserWithToken RefreshToken(string token);
+        UserCommonData GetUserData(int id);
     }
 }

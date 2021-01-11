@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { UserData } from '../models/user.model';
 
 
 @Injectable({
@@ -17,7 +18,7 @@ export class TokenService {
               window.localStorage.token === ''));
   }
 
-  setToken(value: any): void{
+  setToken(value: any): void {
     window.localStorage.token = value;
   }
 
@@ -30,5 +31,21 @@ export class TokenService {
 
   removeToken(): void{
     this.setToken(undefined);
+  }
+
+  setUserData(id: number, name: string): void {
+    window.localStorage.id = id;
+    window.localStorage.name = name;
+  }
+
+  getUserData(): UserData {
+    if (!this.isAuthenticated()) {
+      return null;
+    }
+    return {id: window.localStorage.id, name: window.localStorage.name};
+  }
+
+  removeUserData(): void {
+    this.setUserData(undefined, undefined);
   }
 }

@@ -23,13 +23,14 @@ export enum BookStatus {
 }
 
 export interface BookCreateData {
-    ownerId: number;
+    owner: UserData;
     status: BookStatus;
     title: string;
     author: string;
     category: LiteraryGenre;
     releaseDate: string | Date;
     description?: string;
+    isbn ?: string;
 }
 
 export interface BookUpdateData extends BookCreateData {
@@ -40,4 +41,5 @@ export interface BookUpdateData extends BookCreateData {
 export interface UserData {
     id: number;
     name: string;
+    email?: string;
 }

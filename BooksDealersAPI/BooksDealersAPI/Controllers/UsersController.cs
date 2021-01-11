@@ -8,6 +8,7 @@ using BooksDealersAPI.FrontendModels;
 using BooksDealersAPI.Models;
 using BooksDealersAPI.Services;
 using BooksDealersAPI.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -46,7 +47,7 @@ namespace BooksDealersAPI.Controllers
         }
 
         [HttpPost("register")]
-        public ActionResult<UserWithToken> Register ([FromBody] UserRegisterData user)
+        public ActionResult<UserWithToken> Register([FromBody] UserRegisterData user)
         {
             UserWithToken userWithToken = _userService.Register(user);
 
@@ -56,6 +57,30 @@ namespace BooksDealersAPI.Controllers
             }
 
             return userWithToken;
+        }
+
+        [Authorize]
+        [HttpPost("refresh-token")]
+        public ActionResult<UserWithToken> RefreshToken([FromBody] string token)
+        {
+            UserWithToken userWithToken = _userService.RefreshToken(token);
+            if (userWithToken == null)
+            {
+                return NotFound();
+            }
+            return userWithToken;
+        }
+
+        [Authorize]
+        [HttpGet("{id}")]
+        public ActionResult GetUserData(int id)
+        {
+            UserCommonData userData = _userService.GetUserData(id);
+            if (userData == null)
+            {
+                return NotFound();
+            }
+            return Ok(userData);
         }
 
     }

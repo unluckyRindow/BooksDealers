@@ -11,7 +11,7 @@ export class MockedService {
   readonly TRADES = [
     {
       id: 1,
-      status: TradeStatus.Pending,
+      status: TradeStatus.New,
       lastUpdated: '11-12-2020',
       creationDate: '10-11-2020',
       initiator: {id: 1, name: 'Some Initiator'},

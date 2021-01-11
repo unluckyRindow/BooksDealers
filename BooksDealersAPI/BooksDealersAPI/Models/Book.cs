@@ -1,8 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace BooksDealersAPI.Models
 {
     public class Book
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public User Owner { get; set; }
         public string Status { get; set; }
@@ -12,5 +17,6 @@ namespace BooksDealersAPI.Models
         public DateTime ReleaseDate { get; set; }
         public DateTime CreationDate { get; set; }
         public string Description { get; set; }
+        public string Isbn { get; set; }
     }
 }

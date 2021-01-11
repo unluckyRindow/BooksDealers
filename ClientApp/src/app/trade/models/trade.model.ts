@@ -15,10 +15,18 @@ export interface Trade {
 }
 
 export enum TradeStatus {
-    Pending = 'PENDING',
+    New = 'NEW',
     Accepted = 'ACCEPTED',
-    CounterofferReceived = 'CONTEROFFER_RECEIVED',
-    CounterofferSent = 'COUNTEROFFER_SENT',
+    Counteroffer = 'CONTEROFFER',
     Rejected = 'REJECTED',
     Closed = 'CLOSED',
+}
+
+export interface TradeAddModel {
+    status: TradeStatus;
+    initiator: number;
+    initiatorOffer: number;
+    targetOwner: number;
+    target: number;
+    comments: Comment[];
 }
