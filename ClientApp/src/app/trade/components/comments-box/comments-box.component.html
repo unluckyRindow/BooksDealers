@@ -1,0 +1,33 @@
+<mat-card class="comments-card default-font">
+    <mat-card-header class="comments-header">
+        Comments
+    </mat-card-header>
+    <mat-card-content>
+
+        <div #scroll class="comments-panel">
+            <div *ngFor="let comment of comments" [ngClass]="comment.commentAuthor.id === currentUserId ? 'comment light-comment' : 'comment dark-comment'">
+                <p>{{comment.text}}</p>
+                <span class="date">{{comment.creationDate | date:'dd-MM-y hh:mm'}}</span>
+            </div>
+        </div>
+
+        <div [formGroup]="commentGroup" class="message-panel">
+            <div class="form-field">
+                <mat-form-field>
+                    <mat-label>Type a comment...</mat-label>
+                    <textarea 
+                        matInput 
+                        formControlName="comment"
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="1"
+                        cdkAutosizeMaxRows="3">
+                    </textarea>
+                </mat-form-field>
+            </div>
+            <button mat-mini-fab [disabled]="sendDisabled" (click)="onSend()">
+                <mat-icon>send</mat-icon>
+            </button>
+        </div>
+    </mat-card-content>
+</mat-card>

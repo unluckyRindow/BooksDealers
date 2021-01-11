@@ -1,0 +1,59 @@
+.comments-card {
+    width: 600px;
+    margin: 25px;
+}
+
+.comments-panel {
+    height: 400px;
+    overflow: scroll;
+    height: xyz;
+}
+
+.comment {
+    width: 90%;
+    margin: 10px;
+    padding: 5px 10px 10px 10px;
+    border-radius: 15px;
+}
+
+.light-comment {
+    background-color: #eeeeee;
+    color: black;
+}
+
+.dark-comment {
+    background-color: #30475e;
+    color: #eeeeee;
+}
+
+.comments-header {
+    padding-bottom: 20px;
+}
+
+.message-panel {
+    border-top: 1px solid #acacac;
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.date {
+    font-size: 8px;
+}
+
+.mat-mini-fab {
+    background-color: white;
+    color: #30475e;
+    margin-top: 10px;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.form-field {
+    overflow: scroll;
+    width: 550px;
+    padding-top: 35px;
+}

@@ -23,6 +23,7 @@ namespace BooksDealersAPI.Repository
             modelBuilder.Entity<Trade>()
                 .HasMany(t => t.Comments)
                 .WithOne(c => c.Trade);
+
         }
     }
 }
