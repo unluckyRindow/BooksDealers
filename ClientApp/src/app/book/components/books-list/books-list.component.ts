@@ -44,17 +44,7 @@ export class BooksListComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadBooks()
-      .pipe(untilDestroyed(this))
-      .subscribe(x => {
-        this.booksList = x;
-        this.dataSource = new MatTableDataSource(this.booksList);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.dataSource.filterPredicate = (data: Book, filter: string) => {
-          return data.title.concat(data.author).trim().toLowerCase().includes(filter);
-        };
-    });
+    this.loadBooks();
   }
 
   ngAfterViewInit(): void {
@@ -87,16 +77,29 @@ export class BooksListComponent implements OnInit, AfterViewInit {
       });
   }
 
-  loadBooks(): Observable<Book[]> {
+  loadBooks(): void {
+    this.getProperBooksSource()
+    .pipe(untilDestroyed(this))
+    .subscribe(x => {
+      this.booksList = x;
+      this.dataSource = new MatTableDataSource(this.booksList);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.dataSource.filterPredicate = (data: Book, filter: string) => {
+        return data.title.concat(data.author).trim().toLowerCase().includes(filter);
+      };
+    });
+  }
+
+  getProperBooksSource(): Observable<Book[]> {
     if (this.isUserBooksList) {
-      return this.booksService.getUserBooks();
+      return this.booksService.getUserBooks(this.authService.userId);
     } else {
       return this.booksService.getAllBooks();
     }
   }
 
-  // TODO add ISBN number to book model and replace below with that field
   getCoverUrl(book: Book): string {
-    return book.author ? this.COVERS_API_PREFIX + book.author + this.COVERS_API_SUFFIX : 'assets/no_img.png';
+    return book.isbn ? this.COVERS_API_PREFIX + book.isbn + this.COVERS_API_SUFFIX : 'assets/no_img.png';
   }
 }

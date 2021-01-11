@@ -9,10 +9,17 @@ namespace BooksDealersAPI.FrontendModels
         public int Id { get; set; }
         public string Status { get; set; }
         public string CreationDate { get; set; }
-        public int Initiator { get; set; }
-        public int InitiatorOffer { get; set; }
-        public int TargetOwner { get; set; }
-        public int Target { get; set; }
+        public string LastUpdated { get; set; }
+        public UserData Initiator { get; set; }
+        public BookViewModel InitiatorOffer { get; set; }
+        public UserData TargetOwner { get; set; }
+        public BookViewModel Target { get; set; }
         public ICollection<CommentViewModel> Comments { get; set; }
+    }
+
+    public class UserData
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

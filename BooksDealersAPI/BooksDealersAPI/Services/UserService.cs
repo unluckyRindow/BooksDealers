@@ -73,5 +73,20 @@ namespace BooksDealersAPI.Services
             var userData = tokenHelper.GetTokenData(token);
             return null;
         }
+
+        public UserCommonData GetUserData(int id)
+        {
+            User user = _booksDealersRepository.GetUserById(id);
+            if (user != null)
+            {
+                return new UserCommonData()
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Email = user.Email,
+                };
+            }
+            return null;
+        }
     }
 }

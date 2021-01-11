@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
 import { Observable, of, Subject } from 'rxjs';
 import { Router } from '@angular/router';
-import { RegistrationData, LoginData } from '../models/user.model';
+import { RegistrationData, LoginData, UserData } from '../models/user.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../../environments/environment';
 import { untilDestroyed } from '@ngneat/until-destroy';
@@ -44,6 +44,7 @@ export class AuthService {
         map((x: any) => {
           if (x) {
             this.tokenService.setToken(x.token);
+            this.tokenService.setUserData(x.id, x.name);
             this._userId = x.id;
             this._userName = x.name;
           }
@@ -68,8 +69,17 @@ export class AuthService {
     );
   }
 
+  loadUserDataFromLocalStorage(): void {
+    const data: UserData = this.tokenService.getUserData();
+    if (data) {
+      this._userId = +data.id;
+      this._userName = data.name;
+    }
+  }
+
   logout(): void {
     this.tokenService.removeToken();
+    this.tokenService.removeUserData();
     this.authenticationChanged.next(true);
     this.router.navigate(['/login']);
   }

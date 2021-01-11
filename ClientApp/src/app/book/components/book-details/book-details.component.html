@@ -1,12 +1,22 @@
-<div mat-dialog-title class="custom-title">{{ data.book.title }}</div>
-
 <div mat-dialog-content class="default-font">
-    <div id="author-label">
-        by {{ data.book.author }}
+    <div class="header">
+        <div>
+            <img [src]="getCoverUrl()" />
+        </div>
+        <div>
+            <div class="custom-title">{{ data.book.title }}</div>
+            <div id="author-label">
+                by {{ data.book.author }}
+            </div>
+            <div class="additional-info">
+                {{ data.book.releaseDate | date:'y'}}
+                <br/>
+                {{ data.book.isbn}}
+            </div>
+        </div>
     </div>
-    <div class="additional-info">
-        {{ data.book.releaseDate | date:'y'}}
-    </div>
+
+
     <div id="description" class="additional-info">
         {{ data.book.description }}
     </div>

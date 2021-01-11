@@ -47,7 +47,7 @@ namespace BooksDealersAPI.Controllers
         }
 
         [HttpPost("register")]
-        public ActionResult<UserWithToken> Register ([FromBody] UserRegisterData user)
+        public ActionResult<UserWithToken> Register([FromBody] UserRegisterData user)
         {
             UserWithToken userWithToken = _userService.Register(user);
 
@@ -61,7 +61,7 @@ namespace BooksDealersAPI.Controllers
 
         [Authorize]
         [HttpPost("refresh-token")]
-        public ActionResult<UserWithToken> RefreshToken ([FromBody] string token)
+        public ActionResult<UserWithToken> RefreshToken([FromBody] string token)
         {
             UserWithToken userWithToken = _userService.RefreshToken(token);
             if (userWithToken == null)
@@ -69,6 +69,18 @@ namespace BooksDealersAPI.Controllers
                 return NotFound();
             }
             return userWithToken;
+        }
+
+        [Authorize]
+        [HttpGet("{id}")]
+        public ActionResult GetUserData(int id)
+        {
+            UserCommonData userData = _userService.GetUserData(id);
+            if (userData == null)
+            {
+                return NotFound();
+            }
+            return Ok(userData);
         }
 
     }

@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void{
     this.isAuthenticated = this.authService.isAuthenticated();
+    this.authService.loadUserDataFromLocalStorage();
 
     this.authService.authenticationChanged
       .pipe(untilDestroyed(this))

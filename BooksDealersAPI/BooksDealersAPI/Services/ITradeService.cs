@@ -7,8 +7,8 @@ namespace BooksDealersAPI.Services
 {
     public interface ITradeService
     {
-        IEnumerable<Trade> GetUserTrades(int id);
-        Trade GetTrade(int id);
+        IEnumerable<TradeViewModel> GetUserTrades(int id);
+        TradeViewModel GetTrade(int id);
         bool UpdateTrade(TradeViewModel trade);
         bool AddTrade(TradeAddModel trade);
         bool DeleteTrade(int id);

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, zip } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { Trade } from '../models/trade.model';
+import { Trade, TradeAddModel } from '../models/trade.model';
+import { map } from 'rxjs/operators';
+import { BooksService } from 'src/app/book/services/books.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +15,14 @@ export class TradesService {
   constructor(
     private http: HttpClient,
     private authService: AuthService,
+    private bookService: BooksService,
   ) {
     this.API_URL = this.authService.API_URL;
   }
 
   getUserTrades(): Observable<any> {
-    return this.http.get(this.API_URL + 'api/trades/user-trades/' + this.authService.userId, this.authService.GetHeaders());
+    const id = this.authService.userId;
+    return this.http.get(this.API_URL + 'api/trades/user-trades/' + id, this.authService.GetHeaders());
   }
 
   getTrade(id: number): Observable<any> {
@@ -26,10 +30,10 @@ export class TradesService {
   }
 
   updateTrade(trade: Trade): Observable<any> {
-    return this.http.put(this.API_URL + 'api/trades/' + trade.id, this.authService.GetHeaders());
+    return this.http.put(this.API_URL + 'api/trades/' + trade.id, JSON.stringify(trade), this.authService.GetHeaders());
   }
 
-  addTrade(trade: Trade): Observable<any> {
+  addTrade(trade: TradeAddModel): Observable<any> {
     return this.http.post(this.API_URL + 'api/trades', JSON.stringify(trade), this.authService.GetHeaders());
   }
 }

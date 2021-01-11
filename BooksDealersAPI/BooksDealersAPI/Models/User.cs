@@ -17,4 +17,11 @@ namespace BooksDealersAPI.Models
 
         public ICollection<Book> UserBooks { get; set; } = new List<Book>();
     }
+
+    public class UserCommonData
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+    }
 }

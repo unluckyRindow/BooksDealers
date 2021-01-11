@@ -18,6 +18,8 @@ export interface BookDetailsData{
   styleUrls: ['./book-details.component.scss']
 })
 export class BookDetailsComponent implements OnInit {
+  readonly COVERS_API_PREFIX = 'http://covers.openlibrary.org/b/isbn/';
+  readonly COVERS_API_SUFFIX = '-L.jpg';
 
   @Input()
   book: Book;
@@ -60,6 +62,10 @@ export class BookDetailsComponent implements OnInit {
   onTrade(): void {
     this.router.navigate(['/trades/new'], {state: {data: {targetBook: this.book, creationMode: true}}});
     this.dialog.closeAll();
+  }
+
+  getCoverUrl(): string {
+    return this.book.isbn ? this.COVERS_API_PREFIX + this.book.isbn + this.COVERS_API_SUFFIX : 'assets/no_img.png';
   }
 
 }

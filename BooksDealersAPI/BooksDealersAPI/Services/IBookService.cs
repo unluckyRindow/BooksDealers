@@ -13,5 +13,7 @@ namespace BooksDealersAPI.Services
         bool AddBook(BookAddModel book);
         bool UpdateBook(BookViewModel books);
         bool DeleteBook(int id);
+        Book mapViewBookToDbBookModel(BookViewModel bookViewModel);
+        BookViewModel mapDbBookModelToViewBook(Book book);
     }
 }
