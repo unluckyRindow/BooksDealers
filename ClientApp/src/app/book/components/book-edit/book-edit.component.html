@@ -1,25 +1,25 @@
-<div mat-dialog-title class="custom-title">{{ data.editMode ? 'Edit book' : 'Add book' }}</div>
+<div mat-dialog-title class="custom-title">{{ 'BOOK.EDIT.' + (data.editMode ? 'EDIT' : 'ADD') | translate }}</div>
 
 <div mat-dialog-content class="default-font">
 
     <div [formGroup]="bookGroup" class="book-edit-form">
         <div class="form-field">
             <mat-form-field>
-                <mat-label>Title</mat-label>
+                <mat-label> {{ 'BOOK.EDIT.TITLE' | translate }} </mat-label>
                 <input matInput formControlName="title">
             </mat-form-field>
         </div>
 
         <div class="form-field">
             <mat-form-field>
-                <mat-label>Author</mat-label>
+                <mat-label> {{ 'BOOK.EDIT.AUTHOR' | translate }} </mat-label>
                 <input matInput formControlName="author">
             </mat-form-field>
         </div>
 
         <div class="form-field">
             <mat-form-field>
-                <mat-label>Release Date</mat-label>
+                <mat-label> {{ 'BOOK.EDIT.RELEASE_DATE' | translate }} </mat-label>
                 <input matInput formControlName="releaseDate">
             </mat-form-field>
         </div>
@@ -27,7 +27,7 @@
         <div class="form-field">
             <div class="form-field">
                 <mat-form-field>
-                    <mat-label>Category</mat-label>
+                    <mat-label> {{ 'BOOK.EDIT.CATEGORY' | translate }} </mat-label>
                     <mat-select formControlName="category">
                         <mat-option *ngFor="let genre of genres" [value]="genre">
                             {{ genre }}
@@ -39,14 +39,14 @@
 
         <div class="form-field">
             <mat-form-field>
-                <mat-label>Isbn</mat-label>
+                <mat-label> {{ 'BOOK.EDIT.ISBN' | translate }} </mat-label>
                 <input matInput formControlName="isbn">
             </mat-form-field>
         </div>
 
         <div class="form-field">
             <mat-form-field>
-                <mat-label>Description</mat-label>
+                <mat-label> {{ 'BOOK.EDIT.DESCRIPTION' | translate }} </mat-label>
                 <textarea matInput formControlName="description"></textarea>
             </mat-form-field>
         </div>
@@ -54,10 +54,10 @@
         <div class="form-field">
             <mat-radio-group formControlName="visibility">
                 <span class="radio-wrapper">
-                    <mat-radio-button value="PUBLIC">Public</mat-radio-button>
+                    <mat-radio-button value="PUBLIC"> {{ 'BOOK.EDIT.PUBLIC' | translate }} </mat-radio-button>
                 </span>
                 <span class="radio-wrapper">
-                    <mat-radio-button value="PRIVATE">Private</mat-radio-button>
+                    <mat-radio-button value="PRIVATE"> {{ 'BOOK.EDIT.PRIVATE' | translate }} </mat-radio-button>
                 </span>
             </mat-radio-group>
         </div>
@@ -66,7 +66,7 @@
 </div>
 
 <div mat-dialog-actions>
-    <button *ngIf="data.editMode" mat-button color="custom-button" (click)="onSave()">Save</button>
-    <button *ngIf="!data.editMode" mat-button color="custom-button" (click)="onAdd()">Add book</button>
-    <button mat-stroked-button color="custom-stroked-button"  (click)="onCancel()">Cancel</button>
+    <button *ngIf="data.editMode" mat-button color="custom-button" (click)="onSave()"> {{ 'BOOK.EDIT.SAVE' | translate }} </button>
+    <button *ngIf="!data.editMode" mat-button color="custom-button" (click)="onAdd()"> {{ 'BOOK.EDIT.ADD' | translate }} </button>
+    <button mat-stroked-button color="custom-stroked-button"  (click)="onCancel()"> {{ 'BOOK.EDIT.CANCEL' | translate }} </button>
 </div>

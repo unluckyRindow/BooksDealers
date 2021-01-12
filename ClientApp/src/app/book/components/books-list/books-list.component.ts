@@ -2,13 +2,12 @@ import { Component, OnInit, ViewChild, Input, OnDestroy, AfterViewInit } from '@
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
-import { Book, BookStatus, LiteraryGenre } from '../../models/book.model';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Book } from '../../models/book.model';
+import { MatDialog } from '@angular/material/dialog';
 import { BookDetailsComponent } from '../book-details/book-details.component';
 import { MockedService } from 'src/app/mocked/mocked.service';
 import { BooksService } from '../../services/books.service';
 import { untilDestroyed, UntilDestroy } from '@ngneat/until-destroy';
-import { map, toArray } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Observable } from 'rxjs';
 

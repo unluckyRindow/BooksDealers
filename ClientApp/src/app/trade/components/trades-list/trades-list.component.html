@@ -1,5 +1,5 @@
 <mat-form-field>
-    <mat-label>Search</mat-label>
+    <mat-label>{{ "TRADES_LIST.SEARCH" | translate }}</mat-label>
     <input matInput (keyup)="applyFilter($event)" #input>
 </mat-form-field>
 
@@ -12,32 +12,32 @@
         </ng-container>
 
         <ng-container matColumnDef="target.title">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Target Book </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "TRADES_LIST.TARGET" | translate }} </th>
             <td mat-cell *matCellDef="let trade"> {{trade.target.title}} </td>
         </ng-container>
 
         <ng-container matColumnDef="target.author">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Author </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "TRADES_LIST.AUTHOR" | translate }} </th>
             <td mat-cell *matCellDef="let trade"> {{trade.target.author}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="target.category">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
-            <td mat-cell *matCellDef="let trade"> {{trade.target.category}} </td>
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "TRADES_LIST.STATUS" | translate }} </th>
+            <td mat-cell *matCellDef="let trade"> {{'TRADE.STATUS.' + trade.status | translate}} </td>
         </ng-container>
 
         <ng-container matColumnDef="initiator.name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Trade Initiator </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "TRADES_LIST.TRADE_INITIATOR" | translate }} </th>
             <td mat-cell *matCellDef="let trade"> {{trade.initiator.name}} </td>
         </ng-container>
 
         <ng-container matColumnDef="lastUpdated">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Last updated </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "TRADES_LIST.LAST_UPDATED" | translate }} </th>
             <td mat-cell *matCellDef="let trade"> {{trade.lastUpdated | date:"dd-MM-y HH:mm"}} </td>
         </ng-container>
 
         <ng-container matColumnDef="creationDate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Creation date </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ "TRADES_LIST.CREATION_DATE" | translate }} </th>
             <td mat-cell *matCellDef="let trade"> {{trade.creationDate | date:"dd-MM-y"}} </td>
         </ng-container>
 
@@ -46,7 +46,7 @@
         <tr mat-row *matRowDef="let row; columns: columnsConfig;" (click)="onTradeSelected(row)"></tr>
 
         <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            <td class="mat-cell" colspan="4">{{ "TRADES_LIST.NO_DATA" | translate }}</td>
         </tr>
     </table>
 

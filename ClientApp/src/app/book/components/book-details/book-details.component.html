@@ -6,7 +6,7 @@
         <div>
             <div class="custom-title">{{ data.book.title }}</div>
             <div id="author-label">
-                by {{ data.book.author }}
+                {{ data.book.author }}
             </div>
             <div class="additional-info">
                 {{ data.book.releaseDate | date:'y'}}
@@ -21,17 +21,17 @@
         {{ data.book.description }}
     </div>
     <div class="owner-info">
-        Owned by: {{ data.book.owner.name }}
+        {{ "BOOK.DETAILS.OWNED_BY" | translate }} {{ data.book.owner.name }}
     </div>
     <div class="owner-info">
-        Published: {{ data.book.creationDate | date:'dd-MM-y'}}
+        {{ "BOOK.DETAILS.PUBLISHED" | translate }} {{ data.book.creationDate | date:'dd-MM-y'}}
     </div>
     
 </div>
 
 <div mat-dialog-actions>
-    <button *ngIf="!data.isOwner" mat-button color="custom-button" (click)="onTrade()">Ask for trade</button>
-    <button *ngIf="data.isOwner" mat-button color="custom-button" (click)="onEdit()">Edit</button>
-    <button *ngIf="data.isOwner" mat-button color="custom-button" (click)="onDelete()">Delete</button>
-    <button mat-stroked-button color="custom-stroked-button"  (click)="onClose()">Close</button>
+    <button *ngIf="!data.isOwner" mat-button color="custom-button" (click)="onTrade()"> {{ "BOOK.DETAILS.ASK_FOR_TRADE" | translate }} </button>
+    <button *ngIf="data.isOwner" mat-button color="custom-button" (click)="onEdit()"> {{ "BOOK.DETAILS.EDIT" | translate }} </button>
+    <button *ngIf="data.isOwner" mat-button color="custom-button" (click)="onDelete()"> {{ "BOOK.DETAILS.DELETE" | translate }} </button>
+    <button mat-stroked-button color="custom-stroked-button"  (click)="onClose()"> {{ "BOOK.DETAILS.CLOSE" | translate }} </button>
 </div>
