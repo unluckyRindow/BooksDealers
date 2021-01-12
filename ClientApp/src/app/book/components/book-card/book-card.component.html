@@ -4,7 +4,7 @@
             <div mat-card-avatar class="book-cover" [ngStyle]="{'background-image': 'url(' + getCoverUrl() + ')'}"></div>
             <mat-card-title>{{ book.title }}</mat-card-title>
             <mat-card-subtitle>
-                by {{ book.author }} 
+                {{ book.author }} 
                 <br/> 
                 {{ book.releaseDate | date:'y' }}
             </mat-card-subtitle>
@@ -12,7 +12,7 @@
 
         <div *ngIf="allowToChooseBook" class="form-field f-right">
             <mat-form-field>
-                <mat-label>Change Book</mat-label>
+                <mat-label> {{'BOOK.CARD.CHANGE' | translate}} </mat-label>
                 <mat-select (selectionChange)="onBookChange($event.value)">
                     <mat-option *ngFor="let book of bookOptionLabels" [value]="book.value">
                         {{book.label}}

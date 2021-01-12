@@ -30,7 +30,75 @@
         "SAVE": "Save"
     },
     "BOOKS_LIST" : {
-        "ADD": "Add"
+        "ADD": "Add",
+        "TITLE": "Title",
+        "AUTHOR": "Author",
+        "CATEGORY": "Category",
+        "RELEASE_DATE": "Release data",
+        "CREATION_DATE": "Creation date",
+        "NO_DATA": "No data found",
+        "SEARCH": "Search by title or author",
+        "ITEMS_PER_PAGE": "Items per page"
+    },
+    "TRADES_LIST" : {
+        "TARGET": "Target book",
+        "AUTHOR": "Author",
+        "STATUS": "Status",
+        "TRADE_INITIATOR": "Trade initiator",
+        "LAST_UPDATED": "Last updated",
+        "CREATION_DATE": "Creation date",
+        "NO_DATA": "No data found",
+        "SEARCH": "Search by title or author of the target book",
+        "ITEMS_PER_PAGE": "Items per page"
+    },
+    "TRADE" : {
+        "STATUS" : {
+            "NEW": "New",
+            "ACCEPTED": "Accepted",
+            "REJECTED": "Rejected",
+            "COUNTEROFFER": "Counteroffer",
+            "CLOSED": "Closed"
+        },
+        "DETAILS": {
+            "TRADE_WITH": "Trade with ",
+            "INITIATED_BY": "initiated by ",
+            "CREATED": "created: ",
+            "LAST_UPDATE": "last update: ",
+            "STATUS": "status: ",
+            "REJECT": "REJECT",
+            "ACCEPT": "ACCEPT",
+            "SEND_OFFER": "SEND OFFER"
+        }
+    },
+    "BOOK": {
+        "DETAILS": {
+            "OWNED_BY": "Owner: ",
+            "PUBLISHED": "Published: ",
+            "ASK_FOR_TRADE": "Ask for trade",
+            "EDIT": "Edit",
+            "DELETE": "Delete",
+            "CLOSE": "Close"
+        },
+        "EDIT": {
+            "EDIT": "Edit book",
+            "TITLE": "Title",
+            "AUTHOR": "Author",
+            "RELEASE_DATE": "Release date",
+            "CATEGORY": "Category",
+            "ISBN": "ISBN number",
+            "DESCRIPTION": "Description",
+            "PUBLIC": "Public",
+            "PRIVATE": "Private",
+            "SAVE": "Save",
+            "ADD": "Add book",
+            "CANCEL": "Cancel"
+        },
+        "CARD": {
+            "CHANGE": "Change offer"
+        }
+    },
+    "COMMENT": {
+        "CHAT": "Chat",
+        "TYPE": "Type a message..."
     }
-    
 }

@@ -1,6 +1,6 @@
 <mat-card class="comments-card default-font">
     <mat-card-header class="comments-header">
-        Comments
+        {{ 'COMMENT.CHAT' | translate }}
     </mat-card-header>
     <mat-card-content>
 
@@ -14,7 +14,7 @@
         <div [formGroup]="commentGroup" class="message-panel">
             <div class="form-field">
                 <mat-form-field>
-                    <mat-label>Type a comment...</mat-label>
+                    <mat-label> {{ 'COMMENT.TYPE' | translate }} </mat-label>
                     <textarea 
                         matInput 
                         formControlName="comment"

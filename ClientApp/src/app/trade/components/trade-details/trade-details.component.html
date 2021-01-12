@@ -1,14 +1,14 @@
 <div class="wrapper">
     <div class="header-wrapper default-font">
-        <div class="custom-title">Trade with {{ (creationMode || isUserInitiator) ? targetBook.owner.name : trade.initiator.name }}</div>
+        <div class="custom-title"> {{ "TRADE.DETAILS.TRADE_WITH" | translate }} {{ (creationMode || isUserInitiator) ? targetBook.owner.name : trade.initiator.name }}</div>
         <div class="additional-info">
-            initiated by {{ creationMode ? userName : trade.initiator.name}}
+            {{ "TRADE.DETAILS.INITIATED_BY" | translate }} {{ creationMode ? userName : trade.initiator.name}}
             <br/>
-            status: {{ creationMode ? 'NEW' : trade.status }}
+            {{ "TRADE.DETAILS.STATUS" | translate }} {{ 'TRADE.STATUS.' + (creationMode ? 'NEW' : trade.status) | translate }}
             <div *ngIf="!creationMode" class="align-left">
-                created: {{ trade.creationDate | date:'dd-MM-y hh:mm' }}
+                {{ "TRADE.DETAILS.CREATED" | translate }} {{ trade.creationDate | date:'dd-MM-y hh:mm' }}
                 <br/>
-                last update: {{ trade.lastUpdated | date:'dd-MM-y hh:mm' }}
+                {{ "TRADE.DETAILS.LAST_UPDATE" | translate }} {{ trade.lastUpdated | date:'dd-MM-y hh:mm' }}
             </div>
         </div>
     </div>
@@ -16,10 +16,10 @@
     <app-book-card [book]="targetBook"></app-book-card>
 
     <div class="button-panel">
-        <button mat-stroked-button [disabled]="tradeClosed" color="custom-stroked-button" (click)="onReject()">REJECT</button>
+        <button mat-stroked-button [disabled]="tradeClosed" color="custom-stroked-button" (click)="onReject()"> {{ "TRADE.DETAILS.REJECT" | translate }} </button>
         <mat-icon class="trade-image" [inline]="true" color="custom-icon">loop</mat-icon>
-        <button *ngIf="canAccept" [disabled]="acceptDisabled" mat-raised-button color="custom-raised-button" (click)="onAccept()">ACCEPT</button>
-        <button *ngIf="canSend" [disabled]="sendDisabled" mat-raised-button color="custom-raised-button" (click)="onSendOffer()">SEND OFFER</button>
+        <button *ngIf="canAccept" [disabled]="acceptDisabled" mat-raised-button color="custom-raised-button" (click)="onAccept()"> {{ "TRADE.DETAILS.ACCEPT" | translate }} </button>
+        <button *ngIf="canSend" [disabled]="sendDisabled" mat-raised-button color="custom-raised-button" (click)="onSendOffer()"> {{ "TRADE.DETAILS.SEND_OFFER" | translate }} </button>
     </div>
 
     <app-book-card 

@@ -22,7 +22,7 @@ export class TradesListComponent implements OnInit, OnDestroy, AfterViewInit {
   tradesList: Trade[];
 
   dataSource: MatTableDataSource<Trade>;
-  columnsConfig: string[] = ['cover', 'target.title', 'target.author', 'target.category', 'initiator.name', 'lastUpdated', 'creationDate'];
+  columnsConfig: string[] = ['cover', 'target.title', 'target.author', 'status', 'initiator.name', 'lastUpdated', 'creationDate'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

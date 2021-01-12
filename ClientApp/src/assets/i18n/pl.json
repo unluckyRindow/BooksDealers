@@ -30,6 +30,75 @@
         "SAVE": "Zapisz"
     },
     "BOOKS_LIST" : {
-        "ADD": "Dodaj"
+        "ADD": "Dodaj",
+        "TITLE": "Tytuł",
+        "AUTHOR": "Autor",
+        "CATEGORY": "Kategoria",
+        "RELEASE_DATE": "Data wydania",
+        "CREATION_DATE": "Data opublikowania",
+        "NO_DATA": "Brak danych",
+        "SEARCH": "Wpisz tytuł lub autora",
+        "ITEMS_PER_PAGE": "Ilość produktów na stronie"
+    },
+    "TRADES_LIST" : {
+        "TARGET": "Cel wymiany",
+        "AUTHOR": "Autor",
+        "STATUS": "Status",
+        "TRADE_INITIATOR": "Inicjator wymiany",
+        "LAST_UPDATED": "Ostatnia modyfikacja",
+        "CREATION_DATE": "Data opublikowania",
+        "NO_DATA": "Brak danych",
+        "SEARCH": "Wpisz tytuł lub autora przedmiotu wymiany",
+        "ITEMS_PER_PAGE": "Ilość produktów na stronie"
+    },
+    "TRADE": {
+        "STATUS" : {
+            "NEW": "Nowa",
+            "ACCEPTED": "Zaakceptowana",
+            "REJECTED": "Odrzucona",
+            "COUNTEROFFER": "Kontroferta",
+            "CLOSED": "Zamknięta"
+        },
+        "DETAILS": {
+            "TRADE_WITH": "Wymiana z ",
+            "INITIATED_BY": "zainicjowana przez ",
+            "CREATED": "rozpoczęta: ",
+            "LAST_UPDATE": "ostatnia zmiana: ",
+            "STATUS": "status: ",
+            "REJECT": "ODRZUĆ",
+            "ACCEPT": "ZAAKCEPTUJ",
+            "SEND_OFFER": "WYŚLIJ OFERTĘ"
+        }
+    },
+    "BOOK": {
+        "DETAILS": {
+            "OWNED_BY": "Właściciel: ",
+            "PUBLISHED": "Opublikowano: ",
+            "ASK_FOR_TRADE": "Rozpocznij wymianę",
+            "EDIT": "Edytuj",
+            "DELETE": "Usuń",
+            "CLOSE": "Anuluj"
+        },
+        "EDIT": {
+            "EDIT": "Edytuj książkę",
+            "ADD": "Dodaj książkę",
+            "TITLE": "Tytuł",
+            "AUTHOR": "Autor",
+            "RELEASE_DATE": "Data wydania",
+            "CATEGORY": "Kategoria",
+            "ISBN": "Numer ISBN",
+            "DESCRIPTION": "Opis",
+            "PUBLIC": "Publiczna",
+            "PRIVATE": "Prywatna",
+            "SAVE": "Zapisz",
+            "CANCEL": "Anuluj"
+        },
+        "CARD": {
+            "CHANGE": "Zmień ofertę"
+        }
+    },
+    "COMMENT": {
+        "CHAT": "Chat",
+        "TYPE": "Napisz wiadomość..."
     }
 }
