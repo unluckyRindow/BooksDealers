@@ -1,5 +1,4 @@
-﻿using System;
-namespace BooksDealersAPI.Shared
+﻿namespace BooksDealersAPI.Shared
 {
     public static class IdHelper
     {

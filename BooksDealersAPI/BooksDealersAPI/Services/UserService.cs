@@ -1,5 +1,4 @@
-﻿using System;
-using BooksDealersAPI.FrontendModels;
+﻿using BooksDealersAPI.FrontendModels;
 using BooksDealersAPI.Models;
 using BooksDealersAPI.Repository;
 using BooksDealersAPI.Shared;
@@ -11,12 +10,12 @@ namespace BooksDealersAPI.Services
     {
         private readonly IBooksDealersRepository _booksDealersRepository;
         private readonly JWTSettings _jwtSettings;
-        private TokenHelper tokenHelper = new TokenHelper();
+        private readonly TokenHelper tokenHelper = new TokenHelper();
 
         public UserService(
             IBooksDealersRepository booksDealersRepository,
             IOptions<JWTSettings> jwtSettings
-            )
+        )
         {
             _booksDealersRepository = booksDealersRepository;
             _jwtSettings = jwtSettings.Value;
@@ -25,17 +24,14 @@ namespace BooksDealersAPI.Services
 
         public UserWithToken Login(UserLoginData user)
         {
-            User foundUser = _booksDealersRepository.GetUserByLogin(user.Login);
+            var foundUser = _booksDealersRepository.GetUserByLogin(user.Login);
 
-            if(foundUser == null || foundUser.Password != user.Password)
-            {
-                return null;
-            }
+            if (foundUser == null || foundUser.Password != user.Password) return null;
 
-            UserWithToken userWithToken = new UserWithToken()
+            var userWithToken = new UserWithToken
             {
                 Id = foundUser.Id,
-                Name = foundUser.Name,
+                Name = foundUser.Name
             };
 
             userWithToken.Token = tokenHelper.CreateToken(foundUser.Id, foundUser.Name, _jwtSettings.SecretKey);
@@ -45,7 +41,7 @@ namespace BooksDealersAPI.Services
 
         public UserWithToken Register(UserRegisterData user)
         {
-            User createdUser = new User()
+            var createdUser = new User
             {
                 Name = user.Name,
                 Email = user.Email,
@@ -56,10 +52,10 @@ namespace BooksDealersAPI.Services
             _booksDealersRepository.AddUser(createdUser);
             _booksDealersRepository.Save();
 
-            UserWithToken userWithToken = new UserWithToken()
+            var userWithToken = new UserWithToken
             {
                 Id = createdUser.Id,
-                Name = createdUser.Name,
+                Name = createdUser.Name
             };
             userWithToken.Token = tokenHelper.CreateToken(createdUser.Id, createdUser.Name, _jwtSettings.SecretKey);
 
@@ -76,16 +72,14 @@ namespace BooksDealersAPI.Services
 
         public UserCommonData GetUserData(int id)
         {
-            User user = _booksDealersRepository.GetUserById(id);
+            var user = _booksDealersRepository.GetUserById(id);
             if (user != null)
-            {
-                return new UserCommonData()
+                return new UserCommonData
                 {
                     Id = user.Id,
                     Name = user.Name,
-                    Email = user.Email,
+                    Email = user.Email
                 };
-            }
             return null;
         }
     }

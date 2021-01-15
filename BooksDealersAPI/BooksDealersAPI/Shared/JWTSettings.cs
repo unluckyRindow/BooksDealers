@@ -1,10 +1,7 @@
-﻿using System;
-namespace BooksDealersAPI.Shared
+﻿namespace BooksDealersAPI.Shared
 {
     public class JWTSettings
     {
-
         public string SecretKey { get; set; }
-
     }
 }

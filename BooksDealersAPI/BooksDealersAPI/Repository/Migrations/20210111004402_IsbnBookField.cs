@@ -7,16 +7,16 @@ namespace BooksDealersAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Isbn",
-                table: "Books",
+                "Isbn",
+                "Books",
                 nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Isbn",
-                table: "Books");
+                "Isbn",
+                "Books");
         }
     }
 }

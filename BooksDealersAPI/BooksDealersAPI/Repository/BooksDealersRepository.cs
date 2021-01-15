@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using BooksDealersAPI.Models;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 namespace BooksDealersAPI.Repository
@@ -31,7 +29,6 @@ namespace BooksDealersAPI.Repository
                 .Include(x => x.Owner)
                 .OrderBy(x => x.Title)
                 .ToList();
-
         }
 
         public IEnumerable<Book> GetAllBooksByOwner(int ownerId)
@@ -55,11 +52,10 @@ namespace BooksDealersAPI.Repository
 
         public void DeleteBook(int id)
         {
-            Book book = new Book() { Id = id };
+            var book = new Book {Id = id};
             _context.Books.Attach(book);
             _context.Books.Remove(book);
         }
-
 
 
         public void AddUser(User user)
@@ -70,17 +66,16 @@ namespace BooksDealersAPI.Repository
         public User GetUserByLogin(string login)
         {
             return _context.Users
-                 .Where(x => x.Login == login)
-                 .FirstOrDefault();
+                .Where(x => x.Login == login)
+                .FirstOrDefault();
         }
 
         public User GetUserById(int id)
         {
             return _context.Users
-                 .Where(x => x.Id == id)
-                 .FirstOrDefault();
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
         }
-
 
 
         public IEnumerable<Trade> GetUserTrades(int id)
@@ -97,10 +92,7 @@ namespace BooksDealersAPI.Repository
                 .Local
                 .FirstOrDefault(entry => entry.Id.Equals(trade.Id));
 
-            if (local != null)
-            {
-                _context.Entry(local).State = EntityState.Detached;
-            }
+            if (local != null) _context.Entry(local).State = EntityState.Detached;
             _context.Entry(trade).State = EntityState.Modified;
 
             _context.SaveChanges();
@@ -116,7 +108,7 @@ namespace BooksDealersAPI.Repository
 
         public void DeleteTrade(int id)
         {
-            Trade trade = new Trade() { Id = id };
+            var trade = new Trade {Id = id};
             _context.Trades.Attach(trade);
             _context.Trades.Remove(trade);
         }
@@ -134,8 +126,7 @@ namespace BooksDealersAPI.Repository
 
         public bool Save()
         {
-            return (_context.SaveChanges() >= 0);
+            return _context.SaveChanges() >= 0;
         }
-
     }
 }

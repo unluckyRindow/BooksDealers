@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using BooksDealersAPI.FrontendModels;
 using BooksDealersAPI.Models;
 using BooksDealersAPI.Repository;
-using BooksDealersAPI.Shared;
 
 namespace BooksDealersAPI.Services
 {
     public class TradeService : ITradeService
     {
-        private IBooksDealersRepository _booksDealersRepository;
-        private IBookService _booksService;
+        private readonly IBooksDealersRepository _booksDealersRepository;
+        private readonly IBookService _booksService;
 
         public TradeService(
             IBooksDealersRepository booksDealersRepository,
             IBookService bookService
-            )
+        )
         {
             _booksDealersRepository = booksDealersRepository;
             _booksService = bookService;
@@ -23,7 +22,7 @@ namespace BooksDealersAPI.Services
 
         public bool AddTrade(TradeAddModel tradeAddModel)
         {
-            Trade trade = new Trade()
+            var trade = new Trade
             {
                 Status = tradeAddModel.Status,
                 InitiatiorId = tradeAddModel.Initiator,
@@ -32,7 +31,7 @@ namespace BooksDealersAPI.Services
                 TargetId = tradeAddModel.Target,
                 LastUpdated = DateTime.Now,
                 CreationDate = DateTime.Now,
-                Comments = new List<Comment>(),
+                Comments = new List<Comment>()
             };
             _booksDealersRepository.AddTrade(trade);
             return _booksDealersRepository.Save();
@@ -46,18 +45,18 @@ namespace BooksDealersAPI.Services
 
         public TradeViewModel GetTrade(int id)
         {
-            Trade trade = _booksDealersRepository.GetTrade(id);
+            var trade = _booksDealersRepository.GetTrade(id);
             return mapDbTradeModelToViewTrade(trade);
         }
 
         public IEnumerable<TradeViewModel> GetUserTrades(int id)
         {
-            List<Trade> trades = (List<Trade>)_booksDealersRepository.GetUserTrades(id);
-            List<TradeViewModel> tradesView = new List<TradeViewModel>();
+            var trades = (List<Trade>) _booksDealersRepository.GetUserTrades(id);
+            var tradesView = new List<TradeViewModel>();
 
             trades.ForEach(x =>
             {
-                TradeViewModel tradeViewModel = mapDbTradeModelToViewTrade(x);
+                var tradeViewModel = mapDbTradeModelToViewTrade(x);
                 tradesView.Add(tradeViewModel);
             });
 
@@ -66,14 +65,14 @@ namespace BooksDealersAPI.Services
 
         public bool UpdateTrade(TradeViewModel tradeViewModel)
         {
-            Trade trade = mapViewTradeToDbTradeModel(tradeViewModel);   
+            var trade = mapViewTradeToDbTradeModel(tradeViewModel);
             _booksDealersRepository.UpdateTrade(trade);
             return _booksDealersRepository.Save();
         }
 
         public bool AddComment(CommentViewModel commentViewModel)
         {
-            Comment comment = mapViewCommentToDbCommentModel(commentViewModel, true);
+            var comment = mapViewCommentToDbCommentModel(commentViewModel, true);
             _booksDealersRepository.AddComment(comment);
             return _booksDealersRepository.Save();
         }
@@ -81,29 +80,26 @@ namespace BooksDealersAPI.Services
 
         public TradeViewModel mapDbTradeModelToViewTrade(Trade trade)
         {
-            User initiator = _booksDealersRepository.GetUserById(trade.InitiatiorId);
-            UserData initiatorUserData = new UserData()
+            var initiator = _booksDealersRepository.GetUserById(trade.InitiatiorId);
+            var initiatorUserData = new UserData
             {
                 Id = initiator.Id,
-                Name = initiator.Name,
+                Name = initiator.Name
             };
-            User targetOwner = _booksDealersRepository.GetUserById(trade.TargetOwnerId);
-            UserData targetOwnerUserData = new UserData()
+            var targetOwner = _booksDealersRepository.GetUserById(trade.TargetOwnerId);
+            var targetOwnerUserData = new UserData
             {
                 Id = targetOwner.Id,
-                Name = targetOwner.Name,
+                Name = targetOwner.Name
             };
-            BookViewModel offer = _booksService.mapDbBookModelToViewBook(_booksDealersRepository.GetBook(trade.InitiatorOfferId));
-            BookViewModel target = _booksService.mapDbBookModelToViewBook(_booksDealersRepository.GetBook(trade.TargetId));
-            List<Comment> comments = (List<Comment>)trade.Comments;
-            List<CommentViewModel> commentsViewModel = new List<CommentViewModel>();
+            var offer = _booksService.mapDbBookModelToViewBook(_booksDealersRepository.GetBook(trade.InitiatorOfferId));
+            var target = _booksService.mapDbBookModelToViewBook(_booksDealersRepository.GetBook(trade.TargetId));
+            var comments = (List<Comment>) trade.Comments;
+            var commentsViewModel = new List<CommentViewModel>();
 
-            comments.ForEach(x =>
-            {
-                commentsViewModel.Add(mapDbCommentModelToViewModel(x));
-            });
+            comments.ForEach(x => { commentsViewModel.Add(mapDbCommentModelToViewModel(x)); });
 
-            TradeViewModel tradeViewModel = new TradeViewModel()
+            var tradeViewModel = new TradeViewModel
             {
                 Id = trade.Id,
                 Status = trade.Status,
@@ -113,22 +109,19 @@ namespace BooksDealersAPI.Services
                 TargetOwner = targetOwnerUserData,
                 InitiatorOffer = offer,
                 Target = target,
-                Comments = commentsViewModel,
+                Comments = commentsViewModel
             };
             return tradeViewModel;
         }
 
         public Trade mapViewTradeToDbTradeModel(TradeViewModel tradeViewModel)
         {
-            DateTime creationDate = Convert.ToDateTime(tradeViewModel.CreationDate);
-            List<Comment> comments = new List<Comment>();
-            List<CommentViewModel> commentsViewModel = (List<CommentViewModel>)tradeViewModel.Comments;
+            var creationDate = Convert.ToDateTime(tradeViewModel.CreationDate);
+            var comments = new List<Comment>();
+            var commentsViewModel = (List<CommentViewModel>) tradeViewModel.Comments;
 
-            commentsViewModel.ForEach(x =>
-            {
-                comments.Add(mapViewCommentToDbCommentModel(x, false));
-            });
-            Trade trade = new Trade()
+            commentsViewModel.ForEach(x => { comments.Add(mapViewCommentToDbCommentModel(x, false)); });
+            var trade = new Trade
             {
                 Id = tradeViewModel.Id,
                 Status = tradeViewModel.Status,
@@ -138,40 +131,40 @@ namespace BooksDealersAPI.Services
                 TargetId = tradeViewModel.Target.Id,
                 LastUpdated = DateTime.Now,
                 CreationDate = creationDate,
-                Comments = comments,
+                Comments = comments
             };
             return trade;
         }
 
         public Comment mapViewCommentToDbCommentModel(CommentViewModel commentViewModel, bool creationMode)
         {
-            User author = _booksDealersRepository.GetUserById(commentViewModel.CommentAuthor.Id);
-            DateTime creationDate = Convert.ToDateTime(commentViewModel.CreationDate);
-            Trade trade = _booksDealersRepository.GetTrade(commentViewModel.TradeId);
-            Comment comment = new Comment()
+            var author = _booksDealersRepository.GetUserById(commentViewModel.CommentAuthor.Id);
+            var creationDate = Convert.ToDateTime(commentViewModel.CreationDate);
+            var trade = _booksDealersRepository.GetTrade(commentViewModel.TradeId);
+            var comment = new Comment
             {
                 CommentAuthor = author,
                 Text = commentViewModel.Text,
                 CreationDate = DateTime.Now,
-                Trade = trade,
+                Trade = trade
             };
             if (!creationMode)
             {
                 comment.Id = commentViewModel.Id;
                 comment.CreationDate = creationDate;
-
             }
+
             return comment;
         }
 
         public CommentViewModel mapDbCommentModelToViewModel(Comment comment)
         {
-            UserData authorData = new UserData()
+            var authorData = new UserData
             {
                 Id = comment.CommentAuthor.Id,
-                Name = comment.CommentAuthor.Name,
+                Name = comment.CommentAuthor.Name
             };
-            CommentViewModel commentViewModel = new CommentViewModel()
+            var commentViewModel = new CommentViewModel
             {
                 Id = comment.Id,
                 CommentAuthor = authorData,

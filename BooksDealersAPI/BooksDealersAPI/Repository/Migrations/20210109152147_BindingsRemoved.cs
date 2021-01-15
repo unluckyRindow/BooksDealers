@@ -9,67 +9,68 @@ namespace BooksDealersAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Trades_Users_InitiatiorId",
-                table: "Trades");
+                "FK_Trades_Users_InitiatiorId",
+                "Trades");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Trades_Books_TargetId",
-                table: "Trades");
+                "FK_Trades_Books_TargetId",
+                "Trades");
 
             migrationBuilder.DropIndex(
-                name: "IX_Trades_InitiatiorId",
-                table: "Trades");
+                "IX_Trades_InitiatiorId",
+                "Trades");
 
             migrationBuilder.DropIndex(
-                name: "IX_Trades_TargetId",
-                table: "Trades");
+                "IX_Trades_TargetId",
+                "Trades");
 
             migrationBuilder.AlterColumn<int>(
-                name: "TargetId",
-                table: "Trades",
+                "TargetId",
+                "Trades",
                 nullable: false,
                 oldClrType: typeof(int),
                 oldType: "integer",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<int>(
-                name: "InitiatiorId",
-                table: "Trades",
+                "InitiatiorId",
+                "Trades",
                 nullable: false,
                 oldClrType: typeof(int),
                 oldType: "integer",
                 oldNullable: true);
 
             migrationBuilder.AddColumn<int>(
-                name: "InitiatorOfferId",
-                table: "Trades",
+                "InitiatorOfferId",
+                "Trades",
                 nullable: false,
                 defaultValue: 0);
 
             migrationBuilder.AddColumn<int>(
-                name: "TargetOwnerId",
-                table: "Trades",
+                "TargetOwnerId",
+                "Trades",
                 nullable: false,
                 defaultValue: 0);
 
             migrationBuilder.AddColumn<DateTime>(
-                name: "TastUpdated",
-                table: "Trades",
+                "TastUpdated",
+                "Trades",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<DateTime>(
-                name: "TreationDate",
-                table: "Trades",
+                "TreationDate",
+                "Trades",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.CreateTable(
-                name: "Comment",
-                columns: table => new
+                "Comment",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("Npgsql:ValueGenerationStrategy",
+                            NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CommentAuthorId = table.Column<int>(nullable: true),
                     Text = table.Column<string>(nullable: true),
                     CreationDate = table.Column<DateTime>(nullable: false),
@@ -79,88 +80,88 @@ namespace BooksDealersAPI.Migrations
                 {
                     table.PrimaryKey("PK_Comment", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comment_Users_CommentAuthorId",
-                        column: x => x.CommentAuthorId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
+                        "FK_Comment_Users_CommentAuthorId",
+                        x => x.CommentAuthorId,
+                        "Users",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Comment_Trades_TradeId",
-                        column: x => x.TradeId,
-                        principalTable: "Trades",
-                        principalColumn: "Id",
+                        "FK_Comment_Trades_TradeId",
+                        x => x.TradeId,
+                        "Trades",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comment_CommentAuthorId",
-                table: "Comment",
-                column: "CommentAuthorId");
+                "IX_Comment_CommentAuthorId",
+                "Comment",
+                "CommentAuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comment_TradeId",
-                table: "Comment",
-                column: "TradeId");
+                "IX_Comment_TradeId",
+                "Comment",
+                "TradeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Comment");
+                "Comment");
 
             migrationBuilder.DropColumn(
-                name: "InitiatorOfferId",
-                table: "Trades");
+                "InitiatorOfferId",
+                "Trades");
 
             migrationBuilder.DropColumn(
-                name: "TargetOwnerId",
-                table: "Trades");
+                "TargetOwnerId",
+                "Trades");
 
             migrationBuilder.DropColumn(
-                name: "TastUpdated",
-                table: "Trades");
+                "TastUpdated",
+                "Trades");
 
             migrationBuilder.DropColumn(
-                name: "TreationDate",
-                table: "Trades");
+                "TreationDate",
+                "Trades");
 
             migrationBuilder.AlterColumn<int>(
-                name: "TargetId",
-                table: "Trades",
-                type: "integer",
+                "TargetId",
+                "Trades",
+                "integer",
                 nullable: true,
                 oldClrType: typeof(int));
 
             migrationBuilder.AlterColumn<int>(
-                name: "InitiatiorId",
-                table: "Trades",
-                type: "integer",
+                "InitiatiorId",
+                "Trades",
+                "integer",
                 nullable: true,
                 oldClrType: typeof(int));
 
             migrationBuilder.CreateIndex(
-                name: "IX_Trades_InitiatiorId",
-                table: "Trades",
-                column: "InitiatiorId");
+                "IX_Trades_InitiatiorId",
+                "Trades",
+                "InitiatiorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Trades_TargetId",
-                table: "Trades",
-                column: "TargetId");
+                "IX_Trades_TargetId",
+                "Trades",
+                "TargetId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Trades_Users_InitiatiorId",
-                table: "Trades",
-                column: "InitiatiorId",
-                principalTable: "Users",
+                "FK_Trades_Users_InitiatiorId",
+                "Trades",
+                "InitiatiorId",
+                "Users",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Trades_Books_TargetId",
-                table: "Trades",
-                column: "TargetId",
-                principalTable: "Books",
+                "FK_Trades_Books_TargetId",
+                "Trades",
+                "TargetId",
+                "Books",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }

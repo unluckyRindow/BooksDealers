@@ -7,49 +7,49 @@ namespace BooksDealersAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Comment_Users_CommentAuthorId",
-                table: "Comment");
+                "FK_Comment_Users_CommentAuthorId",
+                "Comment");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Comment_Trades_TradeId",
-                table: "Comment");
+                "FK_Comment_Trades_TradeId",
+                "Comment");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_Comment",
-                table: "Comment");
+                "PK_Comment",
+                "Comment");
 
             migrationBuilder.RenameTable(
-                name: "Comment",
+                "Comment",
                 newName: "Comments");
 
             migrationBuilder.RenameIndex(
-                name: "IX_Comment_TradeId",
+                "IX_Comment_TradeId",
                 table: "Comments",
                 newName: "IX_Comments_TradeId");
 
             migrationBuilder.RenameIndex(
-                name: "IX_Comment_CommentAuthorId",
+                "IX_Comment_CommentAuthorId",
                 table: "Comments",
                 newName: "IX_Comments_CommentAuthorId");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_Comments",
-                table: "Comments",
-                column: "Id");
+                "PK_Comments",
+                "Comments",
+                "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Comments_Users_CommentAuthorId",
-                table: "Comments",
-                column: "CommentAuthorId",
-                principalTable: "Users",
+                "FK_Comments_Users_CommentAuthorId",
+                "Comments",
+                "CommentAuthorId",
+                "Users",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Comments_Trades_TradeId",
-                table: "Comments",
-                column: "TradeId",
-                principalTable: "Trades",
+                "FK_Comments_Trades_TradeId",
+                "Comments",
+                "TradeId",
+                "Trades",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -57,49 +57,49 @@ namespace BooksDealersAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Comments_Users_CommentAuthorId",
-                table: "Comments");
+                "FK_Comments_Users_CommentAuthorId",
+                "Comments");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Comments_Trades_TradeId",
-                table: "Comments");
+                "FK_Comments_Trades_TradeId",
+                "Comments");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_Comments",
-                table: "Comments");
+                "PK_Comments",
+                "Comments");
 
             migrationBuilder.RenameTable(
-                name: "Comments",
+                "Comments",
                 newName: "Comment");
 
             migrationBuilder.RenameIndex(
-                name: "IX_Comments_TradeId",
+                "IX_Comments_TradeId",
                 table: "Comment",
                 newName: "IX_Comment_TradeId");
 
             migrationBuilder.RenameIndex(
-                name: "IX_Comments_CommentAuthorId",
+                "IX_Comments_CommentAuthorId",
                 table: "Comment",
                 newName: "IX_Comment_CommentAuthorId");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_Comment",
-                table: "Comment",
-                column: "Id");
+                "PK_Comment",
+                "Comment",
+                "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Comment_Users_CommentAuthorId",
-                table: "Comment",
-                column: "CommentAuthorId",
-                principalTable: "Users",
+                "FK_Comment_Users_CommentAuthorId",
+                "Comment",
+                "CommentAuthorId",
+                "Users",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Comment_Trades_TradeId",
-                table: "Comment",
-                column: "TradeId",
-                principalTable: "Trades",
+                "FK_Comment_Trades_TradeId",
+                "Comment",
+                "TradeId",
+                "Trades",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
