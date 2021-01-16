@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using BooksDealersAPI.FrontendModels;
 using BooksDealersAPI.Models;
 
 namespace BooksDealersAPI.Repository

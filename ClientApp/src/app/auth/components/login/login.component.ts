@@ -7,6 +7,12 @@ import { RegistrationData, LoginData } from '../../models/user.model';
 import { ValidatorFn } from '@angular/forms';
 
 
+const passwordsMatchValidator: ValidatorFn =  (group: FormGroup): ValidationErrors => {
+    const password = group.get('password').value;
+    const passwordConfirm = group.get('passwordConfirm').value;
+    return (password !== passwordConfirm) ? {equivalentPasswords: false} : null;
+  };
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -33,7 +39,7 @@ export class LoginComponent implements OnInit {
     name: ['', Validators.required],
     password: ['', Validators.required],
     passwordConfirm: ['', Validators.required]
-  });
+  }, {validator: passwordsMatchValidator});
 
   constructor(
     private router: Router,
@@ -48,7 +54,6 @@ export class LoginComponent implements OnInit {
       .subscribe(data => {
         this.registrationMode = data.registrationMode;
       });
-    this.signUpGroup.setValidators(this.passwordsMatchValidator);
   }
 
   get loginData(): LoginData {
@@ -110,14 +115,5 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/login']);
     this.registrationMode = false;
     this.signUpGroup.reset();
-  }
-
-  // TODO fix not applying validator below
-  passwordsMatchValidator(): ValidatorFn {
-    return (group: FormGroup): ValidationErrors => {
-      const password = group.controls.password;
-      const passwordConfirm = group.controls.passwordConfirm;
-      return (password.value !== passwordConfirm.value) ? {equivalentPasswords: false} : null;
-    };
   }
 }

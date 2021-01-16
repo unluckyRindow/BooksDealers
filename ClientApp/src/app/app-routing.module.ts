@@ -9,7 +9,6 @@ import { HomeComponent } from './home/components/home/home.component';
 import { ProfileComponent } from './profile/components/profile/profile.component';
 import { TradeDetailsComponent } from './trade/components/trade-details/trade-details.component';
 
-// TODO routing for perticular book (popup insted?) and existing trade
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/home'},
   {path: 'login', component: LoginComponent, data: {registrationMode: false}},

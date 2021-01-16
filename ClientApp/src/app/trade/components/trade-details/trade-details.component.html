@@ -13,6 +13,13 @@
         </div>
     </div>
 
+    <div *ngIf="tradeAccepted" class="info-panel default-font"> 
+        {{ "TRADE.DETAILS.TRADE_ACCEPTED1" | translate }} 
+        {{ isUserInitiator ? targetBook.owner.name : trade.initiator.name }}
+        {{ "TRADE.DETAILS.TRADE_ACCEPTED2" | translate }} 
+    </div>
+    <div *ngIf="tradeRejected" class="info-panel default-font"> {{ "TRADE.DETAILS.TRADE_REJECTED" | translate }} </div>
+
     <app-book-card [book]="targetBook"></app-book-card>
 
     <div class="button-panel">
@@ -30,7 +37,7 @@
     </app-book-card>
 
     <app-comments-box
-        [sendDisabled]="creationMode"
+        [sendDisabled]="creationMode || tradeRejected"
         (commentSend)="onCommentSend($event)"
         [comments]="trade ? trade.comments : []"
     >

@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using BooksDealersAPI.FrontendModels;
-using BooksDealersAPI.Models;
+﻿using BooksDealersAPI.FrontendModels;
 using BooksDealersAPI.Services;
 using BooksDealersAPI.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 
 namespace BooksDealersAPI.Controllers
 {
@@ -25,7 +17,7 @@ namespace BooksDealersAPI.Controllers
         public UsersController(
             IOptions<JWTSettings> jwtSettings,
             IUserService userService
-            )
+        )
         {
             _jwtSettings = jwtSettings.Value;
             _userService = userService;
@@ -35,13 +27,9 @@ namespace BooksDealersAPI.Controllers
         [HttpPost("login")]
         public ActionResult<UserWithToken> Login([FromBody] UserLoginData user)
         {
+            var userWithToken = _userService.Login(user);
 
-            UserWithToken userWithToken = _userService.Login(user);
-
-            if (userWithToken == null)
-            {
-                return NotFound();
-            }
+            if (userWithToken == null) return NotFound();
 
             return userWithToken;
         }
@@ -49,12 +37,9 @@ namespace BooksDealersAPI.Controllers
         [HttpPost("register")]
         public ActionResult<UserWithToken> Register([FromBody] UserRegisterData user)
         {
-            UserWithToken userWithToken = _userService.Register(user);
+            var userWithToken = _userService.Register(user);
 
-            if (userWithToken == null)
-            {
-                return BadRequest();
-            }
+            if (userWithToken == null) return BadRequest();
 
             return userWithToken;
         }
@@ -63,11 +48,8 @@ namespace BooksDealersAPI.Controllers
         [HttpPost("refresh-token")]
         public ActionResult<UserWithToken> RefreshToken([FromBody] string token)
         {
-            UserWithToken userWithToken = _userService.RefreshToken(token);
-            if (userWithToken == null)
-            {
-                return NotFound();
-            }
+            var userWithToken = _userService.RefreshToken(token);
+            if (userWithToken == null) return NotFound();
             return userWithToken;
         }
 
@@ -75,13 +57,9 @@ namespace BooksDealersAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult GetUserData(int id)
         {
-            UserCommonData userData = _userService.GetUserData(id);
-            if (userData == null)
-            {
-                return NotFound();
-            }
+            var userData = _userService.GetUserData(id);
+            if (userData == null) return NotFound();
             return Ok(userData);
         }
-
     }
 }

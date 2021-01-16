@@ -11,10 +11,17 @@ export interface Book {
     isbn?: string;
 }
 
-// TODO add all books categories
 export enum LiteraryGenre {
     Adventure = 'ADVENTURE',
-    Fiction = 'FICTION'
+    Fiction = 'FICTION',
+    Romance = 'ROMANCE',
+    Thriller = 'THRILLER',
+    Biography = 'BIOGRAPHY',
+    Psychological = 'PSYCHOLOGICAL',
+    Drama = 'DRAMA',
+    Comedy = 'COMEDY',
+    Action = 'ACTION',
+    Novel = 'NOVEL'
 }
 
 export enum BookStatus {

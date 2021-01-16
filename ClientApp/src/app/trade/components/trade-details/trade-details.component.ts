@@ -55,6 +55,14 @@ export class TradeDetailsComponent implements OnInit {
     return this.authService.userName;
   }
 
+  get tradeRejected(): boolean {
+    return this.trade && this.trade.status === TradeStatus.Rejected;
+  }
+
+  get tradeAccepted(): boolean {
+    return this.trade && this.trade.status === TradeStatus.Accepted;
+  }
+
 
   constructor(
     private router: Router,
@@ -75,7 +83,6 @@ export class TradeDetailsComponent implements OnInit {
           this.isUserInitiator = this.creationMode || this.trade.initiator.id === this.authService.userId;
           this.booksSourceId = this.isUserInitiator ? this.authService.userId : this.trade.initiator.id;
           this.resolveVisiblityFlags(this.trade, this.creationMode);
-
         });
     } else {
       this.trade = history.state.data.trade as Trade;

@@ -38,7 +38,9 @@
         "CREATION_DATE": "Creation date",
         "NO_DATA": "No data found",
         "SEARCH": "Search by title or author",
-        "ITEMS_PER_PAGE": "Items per page"
+        "ITEMS_PER_PAGE": "Items per page",
+        "EXPLORE": "Explore other users books",
+        "USER_LIST": "Your books collection"
     },
     "TRADES_LIST" : {
         "TARGET": "Target book",
@@ -49,7 +51,8 @@
         "CREATION_DATE": "Creation date",
         "NO_DATA": "No data found",
         "SEARCH": "Search by title or author of the target book",
-        "ITEMS_PER_PAGE": "Items per page"
+        "ITEMS_PER_PAGE": "Items per page",
+        "USER_TRADES": "Your trades"
     },
     "TRADE" : {
         "STATUS" : {
@@ -67,7 +70,10 @@
             "STATUS": "status: ",
             "REJECT": "REJECT",
             "ACCEPT": "ACCEPT",
-            "SEND_OFFER": "SEND OFFER"
+            "SEND_OFFER": "SEND OFFER",
+            "TRADE_REJECTED": "Trade was rejected, no further operations are available",
+            "TRADE_ACCEPTED1": "Trade accepted, now you can use chat below to contact ",
+            "TRADE_ACCEPTED2": "and establish trade date and location"
         }
     },
     "BOOK": {

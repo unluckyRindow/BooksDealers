@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TradesListComponent } from './trades-list.component';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import { FormBuilder } from '@angular/forms';
 
 describe('TradesListComponent', () => {
   let component: TradesListComponent;
@@ -8,7 +12,13 @@ describe('TradesListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TradesListComponent ]
+      declarations: [ TradesListComponent ],
+      imports: [MatDialogModule, HttpClientTestingModule, TranslateModule.forRoot()],
+      providers: [
+        FormBuilder,
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} }
+      ],
     })
     .compileComponents();
   }));

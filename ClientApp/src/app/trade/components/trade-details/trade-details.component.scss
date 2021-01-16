@@ -32,3 +32,16 @@
     max-width: 1200px;
     padding-bottom: 100px;
 }
+
+.info-panel {
+    width: 570px;
+    height: 20px;
+    background-color: #eeeeee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    margin-bottom: 100px;
+    border-radius: 10px;
+    padding: 30px
+}

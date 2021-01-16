@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BooksDealersAPI.FrontendModels;
-using BooksDealersAPI.Models;
-using BooksDealersAPI.Repository;
+﻿using BooksDealersAPI.FrontendModels;
 using BooksDealersAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 
 namespace BooksDealersAPI.Controllers
 {
@@ -20,8 +13,8 @@ namespace BooksDealersAPI.Controllers
         private readonly IBookService _bookService;
 
         public BooksController(
-                IBookService bookService
-            )
+            IBookService bookService
+        )
         {
             _bookService = bookService;
         }
@@ -47,35 +40,25 @@ namespace BooksDealersAPI.Controllers
         [HttpPost]
         public IActionResult AddBook([FromBody] BookAddModel book)
         {
-            bool created = _bookService.AddBook(book);
-            if (created)
-            {
-                return Ok();
-            }
+            var created = _bookService.AddBook(book);
+            if (created) return Ok();
             return BadRequest();
         }
 
         [HttpPut("{id}")]
         public IActionResult UpdateBook([FromBody] BookViewModel book, int id)
         {
-            bool updated = _bookService.UpdateBook(book);
-            if (updated)
-            {
-                return NoContent();
-            }
+            var updated = _bookService.UpdateBook(book);
+            if (updated) return NoContent();
             return NotFound();
         }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteBook(int id)
         {
-            bool deleted = _bookService.DeleteBook(id);
-            if (deleted)
-            {
-                return Ok();
-            }
+            var deleted = _bookService.DeleteBook(id);
+            if (deleted) return Ok();
             return NotFound();
         }
     }
-    
 }

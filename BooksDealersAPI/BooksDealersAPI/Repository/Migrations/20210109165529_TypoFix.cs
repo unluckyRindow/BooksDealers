@@ -8,22 +8,22 @@ namespace BooksDealersAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "TastUpdated",
-                table: "Trades");
+                "TastUpdated",
+                "Trades");
 
             migrationBuilder.DropColumn(
-                name: "TreationDate",
-                table: "Trades");
+                "TreationDate",
+                "Trades");
 
             migrationBuilder.AddColumn<DateTime>(
-                name: "CreationDate",
-                table: "Trades",
+                "CreationDate",
+                "Trades",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<DateTime>(
-                name: "LastUpdated",
-                table: "Trades",
+                "LastUpdated",
+                "Trades",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
         }
@@ -31,24 +31,24 @@ namespace BooksDealersAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "CreationDate",
-                table: "Trades");
+                "CreationDate",
+                "Trades");
 
             migrationBuilder.DropColumn(
-                name: "LastUpdated",
-                table: "Trades");
+                "LastUpdated",
+                "Trades");
 
             migrationBuilder.AddColumn<DateTime>(
-                name: "TastUpdated",
-                table: "Trades",
-                type: "timestamp without time zone",
+                "TastUpdated",
+                "Trades",
+                "timestamp without time zone",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<DateTime>(
-                name: "TreationDate",
-                table: "Trades",
-                type: "timestamp without time zone",
+                "TreationDate",
+                "Trades",
+                "timestamp without time zone",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
         }

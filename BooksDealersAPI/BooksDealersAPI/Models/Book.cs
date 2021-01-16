@@ -9,6 +9,7 @@ namespace BooksDealersAPI.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
         public User Owner { get; set; }
         public string Status { get; set; }
         public string Title { get; set; }

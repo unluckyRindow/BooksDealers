@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using BooksDealersAPI.Models;
+﻿using System.Collections.Generic;
 
 namespace BooksDealersAPI.FrontendModels
 {

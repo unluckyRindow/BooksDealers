@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using BooksDealersAPI.FrontendModels;
 using BooksDealersAPI.Models;
 using BooksDealersAPI.Repository;
-using BooksDealersAPI.Shared;
 
 namespace BooksDealersAPI.Services
 {
     public class BookService : IBookService
     {
-        private IBooksDealersRepository _booksDealersRepository;
+        private readonly IBooksDealersRepository _booksDealersRepository;
 
         public BookService(IBooksDealersRepository booksDealersRepository)
         {
@@ -19,9 +17,9 @@ namespace BooksDealersAPI.Services
 
         public bool AddBook(BookAddModel bookAddModel)
         {
-            DateTime date = Convert.ToDateTime($"{bookAddModel.ReleaseDate}-01-01");
-            User owner = _booksDealersRepository.GetUserById(bookAddModel.OwnerId);
-            Book book = new Book()
+            var date = Convert.ToDateTime($"{bookAddModel.ReleaseDate}-01-01");
+            var owner = _booksDealersRepository.GetUserById(bookAddModel.OwnerId);
+            var book = new Book
             {
                 Owner = owner,
                 Status = bookAddModel.Status,
@@ -54,7 +52,7 @@ namespace BooksDealersAPI.Services
 
         public bool UpdateBook(BookViewModel bookViewModel)
         {
-            Book book = mapViewBookToDbBookModel(bookViewModel);
+            var book = mapViewBookToDbBookModel(bookViewModel);
             _booksDealersRepository.UpdateBook(book);
             return _booksDealersRepository.Save();
         }
@@ -68,10 +66,10 @@ namespace BooksDealersAPI.Services
 
         public Book mapViewBookToDbBookModel(BookViewModel bookViewModel)
         {
-            User owner = _booksDealersRepository.GetUserById(bookViewModel.Owner.Id);
-            DateTime releaseDate = Convert.ToDateTime($"{bookViewModel.ReleaseDate}-01-01");
-            DateTime creationDate = Convert.ToDateTime(bookViewModel.CreationDate);
-            Book book = new Book()
+            var owner = _booksDealersRepository.GetUserById(bookViewModel.Owner.Id);
+            var releaseDate = Convert.ToDateTime($"{bookViewModel.ReleaseDate}-01-01");
+            var creationDate = Convert.ToDateTime(bookViewModel.CreationDate);
+            var book = new Book
             {
                 Id = bookViewModel.Id,
                 Owner = owner,
@@ -89,12 +87,12 @@ namespace BooksDealersAPI.Services
 
         public BookViewModel mapDbBookModelToViewBook(Book book)
         {
-            UserData userData = new UserData()
+            var userData = new UserData
             {
                 Id = book.Owner.Id,
                 Name = book.Owner.Name
             };
-            BookViewModel bookviewModel = new BookViewModel()
+            var bookviewModel = new BookViewModel
             {
                 Id = book.Id,
                 Owner = userData,

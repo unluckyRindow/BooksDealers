@@ -10,6 +10,7 @@ namespace BooksDealersAPI.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
         public string Status { get; set; }
         public int InitiatiorId { get; set; }
         public int InitiatorOfferId { get; set; }
@@ -18,6 +19,5 @@ namespace BooksDealersAPI.Models
         public DateTime LastUpdated { get; set; }
         public DateTime CreationDate { get; set; }
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
-
     }
 }

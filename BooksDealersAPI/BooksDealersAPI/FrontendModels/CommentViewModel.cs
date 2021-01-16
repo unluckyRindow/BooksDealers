@@ -1,5 +1,4 @@
-﻿using System;
-namespace BooksDealersAPI.FrontendModels
+﻿namespace BooksDealersAPI.FrontendModels
 {
     public class CommentViewModel
     {
