@@ -5,7 +5,7 @@
     <mat-card-content>
 
         <div #scroll class="comments-panel">
-            <div *ngFor="let comment of comments" [ngClass]="comment.commentAuthor.id === currentUserId ? 'comment light-comment' : 'comment dark-comment'">
+            <div *ngFor="let comment of comments" [ngClass]="comment.commentAuthor.id !== currentUserId ? 'comment light-comment' : 'comment dark-comment'">
                 <p>{{comment.text}}</p>
                 <span class="date">{{comment.creationDate | date:'dd-MM-y hh:mm'}}</span>
             </div>

@@ -38,7 +38,9 @@
         "CREATION_DATE": "Data opublikowania",
         "NO_DATA": "Brak danych",
         "SEARCH": "Wpisz tytuł lub autora",
-        "ITEMS_PER_PAGE": "Ilość produktów na stronie"
+        "ITEMS_PER_PAGE": "Ilość produktów na stronie",
+        "EXPLORE": "Przeglądaj książki innych użytkowników",
+        "USER_LIST": "Twoja kolekcja książek"
     },
     "TRADES_LIST" : {
         "TARGET": "Cel wymiany",
@@ -49,7 +51,8 @@
         "CREATION_DATE": "Data opublikowania",
         "NO_DATA": "Brak danych",
         "SEARCH": "Wpisz tytuł lub autora przedmiotu wymiany",
-        "ITEMS_PER_PAGE": "Ilość produktów na stronie"
+        "ITEMS_PER_PAGE": "Ilość produktów na stronie",
+        "USER_TRADES": "Twoje wymiany"
     },
     "TRADE": {
         "STATUS" : {
@@ -67,7 +70,10 @@
             "STATUS": "status: ",
             "REJECT": "ODRZUĆ",
             "ACCEPT": "ZAAKCEPTUJ",
-            "SEND_OFFER": "WYŚLIJ OFERTĘ"
+            "SEND_OFFER": "WYŚLIJ OFERTĘ",
+            "TRADE_REJECTED": "Wymiana została odrzucona, brak dostępnych operacji",
+            "TRADE_ACCEPTED1": "Wymiana zaakceptowana, teraz możesz użyć chatu ponżej aby skontakować się z ",
+            "TRADE_ACCEPTED2": "i ustalić kiedy i gdzie odbędzie się wymiana"
         }
     },
     "BOOK": {

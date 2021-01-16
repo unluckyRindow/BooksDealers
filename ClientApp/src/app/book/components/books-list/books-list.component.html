@@ -1,3 +1,5 @@
+<div *ngIf="!isUserBooksList" class="custom-title default-font pb"> {{ "BOOKS_LIST.EXPLORE" | translate }} </div>
+
 <mat-form-field>
     <mat-label>{{ "BOOKS_LIST.SEARCH" | translate }}</mat-label>
     <input matInput (keyup)="applyFilter($event)" #input>
