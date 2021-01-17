@@ -59,7 +59,7 @@
             "NEW": "New",
             "ACCEPTED": "Accepted",
             "REJECTED": "Rejected",
-            "COUNTEROFFER": "Counteroffer",
+            "CONTEROFFER": "Counteroffer",
             "CLOSED": "Closed"
         },
         "DETAILS": {
@@ -106,5 +106,7 @@
     "COMMENT": {
         "CHAT": "Chat",
         "TYPE": "Type a message..."
-    }
+    },
+    "HOME_TITLE": "Welcome in BooksDealers",
+    "HOME_TEXT": "Main purpouse of this application was to make it possible, and more important easy, to exchange books with other people<br>To navigate in site you can use menu above:<br>&nbsp;&nbsp&nbsp<b>BOOKS</b> will take you to all users books<br>&nbsp&nbsp&nbsp<b>MY BOOKS</b> contains list of your books collection<br>&nbsp&nbsp&nbsp<b>TRADES</b> displays all you active or archive trades with others<br>In the expandable menu on the end of header you will find your account settings and logout option<br><br>Enjoy!"
 }
