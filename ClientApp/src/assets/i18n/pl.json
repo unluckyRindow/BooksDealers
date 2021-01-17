@@ -59,7 +59,7 @@
             "NEW": "Nowa",
             "ACCEPTED": "Zaakceptowana",
             "REJECTED": "Odrzucona",
-            "COUNTEROFFER": "Kontroferta",
+            "CONTEROFFER": "Kontroferta",
             "CLOSED": "Zamknięta"
         },
         "DETAILS": {
@@ -106,5 +106,7 @@
     "COMMENT": {
         "CHAT": "Chat",
         "TYPE": "Napisz wiadomość..."
-    }
+    },
+    "HOME_TITLE": "Witaj w BooksDealer",
+    "HOME_TEXT": "Aplikacja powstała by umożliwić sprawną wymianę książkami posiadanymi w świecie rzeczywistym<br>Do poruszania się po platformie służy widoczne u góry menu:<br>&nbsp;&nbsp&nbsp<b>KSIĄŻKI</b> przeniesie Cię do globalnej puli książek<br>&nbsp&nbsp&nbsp<b>MOJE KSIĄŻKI</b> zawiera listę Twojej kolekcji<br>&nbsp&nbsp&nbsp<b>WYMIANY</b> wyświetla wszystkie Twoje aktualne i archiwalne wymiany<br>W rozwijanym menu na końcu nagłówka znajdują się ustawienia konta oraz opcja wylogowania<br><br>Enjoy!"
 }
